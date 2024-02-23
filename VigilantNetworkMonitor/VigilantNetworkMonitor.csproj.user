@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Compile Update="NetworkInterfacesDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="PacketsDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="RootForm.cs">
       <SubType>Form</SubType>
     </Compile>
