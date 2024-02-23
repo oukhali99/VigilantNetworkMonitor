@@ -4,6 +4,9 @@
     <Compile Update="NetworkInterfacesDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="PacketsDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>

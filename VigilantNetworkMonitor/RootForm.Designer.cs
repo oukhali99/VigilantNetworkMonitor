@@ -24,16 +24,18 @@
         /// </summary>
         private void InitializeComponent() {
             packetDataGridView1 = new PacketsDataGridView();
-            networkInterfacesDataGridView = new NetworkInterfacesDataGridView();
-            nam = new DataGridViewTextBoxColumn();
-            description = new DataGridViewTextBoxColumn();
-            sniffButton = new Button();
             sourceIp = new DataGridViewTextBoxColumn();
             sourcePort = new DataGridViewTextBoxColumn();
             destinationIP = new DataGridViewTextBoxColumn();
             destinationPort = new DataGridViewTextBoxColumn();
+            sniffButton = new Button();
+            menuStrip = new MenuStrip();
+            file = new ToolStripMenuItem();
+            toolStripExit = new ToolStripMenuItem();
+            tools = new ToolStripMenuItem();
+            options = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)networkInterfacesDataGridView).BeginInit();
+            menuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // packetDataGridView1
@@ -44,44 +46,10 @@
             packetDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             packetDataGridView1.Columns.AddRange(new DataGridViewColumn[] { sourceIp, sourcePort, destinationIP, destinationPort });
             packetDataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
-            packetDataGridView1.Location = new Point(12, 208);
+            packetDataGridView1.Location = new Point(12, 56);
             packetDataGridView1.Name = "packetDataGridView1";
-            packetDataGridView1.Size = new Size(776, 230);
+            packetDataGridView1.Size = new Size(776, 382);
             packetDataGridView1.TabIndex = 0;
-            // 
-            // networkInterfacesDataGridView
-            // 
-            networkInterfacesDataGridView.AllowUserToAddRows = false;
-            networkInterfacesDataGridView.AllowUserToDeleteRows = false;
-            networkInterfacesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            networkInterfacesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            networkInterfacesDataGridView.Columns.AddRange(new DataGridViewColumn[] { nam, description });
-            networkInterfacesDataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
-            networkInterfacesDataGridView.Location = new Point(12, 12);
-            networkInterfacesDataGridView.Name = "networkInterfacesDataGridView";
-            networkInterfacesDataGridView.Size = new Size(776, 143);
-            networkInterfacesDataGridView.TabIndex = 1;
-            networkInterfacesDataGridView.CellClick += networkInterfacesDataGridView_CellClick;
-            // 
-            // nam
-            // 
-            nam.HeaderText = "Name";
-            nam.Name = "nam";
-            // 
-            // description
-            // 
-            description.HeaderText = "Description";
-            description.Name = "description";
-            // 
-            // sniffButton
-            // 
-            sniffButton.Location = new Point(733, 170);
-            sniffButton.Name = "sniffButton";
-            sniffButton.Size = new Size(55, 23);
-            sniffButton.TabIndex = 2;
-            sniffButton.Text = "Sniff";
-            sniffButton.UseVisualStyleBackColor = true;
-            sniffButton.Click += sniffButton_Click;
             // 
             // sourceIp
             // 
@@ -103,32 +71,86 @@
             destinationPort.HeaderText = "Destination Port";
             destinationPort.Name = "destinationPort";
             // 
+            // sniffButton
+            // 
+            sniffButton.Location = new Point(733, 27);
+            sniffButton.Name = "sniffButton";
+            sniffButton.Size = new Size(55, 23);
+            sniffButton.TabIndex = 2;
+            sniffButton.Text = "Sniff";
+            sniffButton.UseVisualStyleBackColor = true;
+            sniffButton.Click += sniffButton_Click;
+            // 
+            // menuStrip
+            // 
+            menuStrip.Items.AddRange(new ToolStripItem[] { file, tools });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(800, 24);
+            menuStrip.TabIndex = 3;
+            menuStrip.Text = "menuStrip1";
+            // 
+            // file
+            // 
+            file.DropDownItems.AddRange(new ToolStripItem[] { toolStripExit });
+            file.Name = "file";
+            file.ShortcutKeyDisplayString = "F";
+            file.Size = new Size(37, 20);
+            file.Text = "File";
+            // 
+            // toolStripExit
+            // 
+            toolStripExit.Name = "toolStripExit";
+            toolStripExit.ShortcutKeys = Keys.Control | Keys.E;
+            toolStripExit.Size = new Size(133, 22);
+            toolStripExit.Text = "Exit";
+            toolStripExit.Click += toolStripExit_Click;
+            // 
+            // tools
+            // 
+            tools.DropDownItems.AddRange(new ToolStripItem[] { options });
+            tools.Name = "tools";
+            tools.Size = new Size(46, 20);
+            tools.Text = "Tools";
+            // 
+            // options
+            // 
+            options.Name = "options";
+            options.Size = new Size(116, 22);
+            options.Text = "Options";
+            options.Click += options_Click;
+            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(sniffButton);
-            Controls.Add(networkInterfacesDataGridView);
             Controls.Add(packetDataGridView1);
+            Controls.Add(menuStrip);
+            MainMenuStrip = menuStrip;
             Name = "RootForm";
             Text = "Vigilant";
             Load += RootForm_Load;
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)networkInterfacesDataGridView).EndInit();
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private PacketsDataGridView packetDataGridView1;
-        private NetworkInterfacesDataGridView networkInterfacesDataGridView;
-        private DataGridViewTextBoxColumn nam;
-        private DataGridViewTextBoxColumn description;
         private Button sniffButton;
         private DataGridViewTextBoxColumn sourceIp;
         private DataGridViewTextBoxColumn sourcePort;
         private DataGridViewTextBoxColumn destinationIP;
         private DataGridViewTextBoxColumn destinationPort;
+        private MenuStrip menuStrip;
+        private ToolStripMenuItem file;
+        private ToolStripMenuItem toolStripExit;
+        private ToolStripMenuItem tools;
+        private ToolStripMenuItem options;
     }
 }

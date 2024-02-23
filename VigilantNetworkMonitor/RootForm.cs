@@ -3,30 +3,40 @@ using System.Windows.Forms;
 namespace VigilantNetworkMonitor {
     public partial class RootForm : Form {
 
+        private OptionsForm optionsForm;
+
         public RootForm() {
             InitializeComponent();
+            optionsForm = new OptionsForm();
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
-            networkInterfacesDataGridView.Load();
-            packetDataGridView1.Load(networkInterfacesDataGridView);
+            packetDataGridView1.Load(optionsForm.GetNetworkInterfacesDataGridView());
         }
 
         private void networkInterfacesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e) {
-            networkInterfacesDataGridView.OnClickedRow(e.RowIndex);
+            optionsForm.GetNetworkInterfacesDataGridView().OnClickedRow(e.RowIndex);
         }
 
         private void sniffButton_Click(object sender, EventArgs e) {
             if (packetDataGridView1.IsSniffing()) {
-                networkInterfacesDataGridView.Enabled = true;
+                optionsForm.GetNetworkInterfacesDataGridView().Enabled = true;
                 packetDataGridView1.StopSniffing();
-                sniffButton.Text = "Sniff";
             }
             else {
-                networkInterfacesDataGridView.Enabled = false;
+                optionsForm.GetNetworkInterfacesDataGridView().Enabled = false;
                 packetDataGridView1.StartSniffing();
-                sniffButton.Text = "Stop";
             }
+
+            sniffButton.Text = packetDataGridView1.IsSniffing() ? "Stop" : "Sniff";
+        }
+
+        private void toolStripExit_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void options_Click(object sender, EventArgs e) {
+            optionsForm.ShowDialog();
         }
     }
 }
