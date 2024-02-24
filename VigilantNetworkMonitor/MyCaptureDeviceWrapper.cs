@@ -56,5 +56,9 @@ namespace VigilantNetworkMonitor {
             captureDevice.StartCapture();
         }
 
+        public string GetName() {
+            return captureDevice.Name;
+        }
+
     }
 }

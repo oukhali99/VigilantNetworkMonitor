@@ -1,10 +1,4 @@
 ﻿using SharpPcap;
-using SharpPcap.LibPcap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VigilantNetworkMonitor {
     internal class NetworkInterfacesDataGridView : DataGridView {
@@ -15,9 +9,6 @@ namespace VigilantNetworkMonitor {
 
         public NetworkInterfacesDataGridView() {
             deviceList = new LinkedList<MyCaptureDeviceWrapper>();
-        }
-
-        public void Load() {
             CaptureDeviceList devices = CaptureDeviceList.Instance;
             foreach (ICaptureDevice dev in devices) {
                 MyCaptureDeviceWrapper myCaptureDeviceWrapper = new MyCaptureDeviceWrapper(dev);
@@ -26,14 +17,23 @@ namespace VigilantNetworkMonitor {
                 }
 
                 deviceList.Add(myCaptureDeviceWrapper);
+
+                if (myCaptureDeviceWrapper.GetName().Equals(Properties.Settings.Default.SelectedCaptureDeviceName)) {
+                    SelectedCaptureDeviceWrapper = myCaptureDeviceWrapper;
+                }
+            }
+        }
+
+        public void Load() {
+            foreach (MyCaptureDeviceWrapper myCaptureDeviceWrapper in deviceList) {
                 Rows.Add(myCaptureDeviceWrapper.FriendlyName, myCaptureDeviceWrapper.IpAddress);
             }
-
-            SelectedCaptureDeviceWrapper = deviceList.ElementAt(0);
         }
 
         public void OnClickedRow(int rowIndex) {
             SelectedCaptureDeviceWrapper = deviceList.ElementAt(rowIndex);
+            Properties.Settings.Default.SelectedCaptureDeviceName = SelectedCaptureDeviceWrapper.GetName();
+            Properties.Settings.Default.Save();
         }
 
     }

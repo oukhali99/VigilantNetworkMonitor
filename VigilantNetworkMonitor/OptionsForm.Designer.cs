@@ -41,6 +41,7 @@
             networkInterfacesDataGridView.Name = "networkInterfacesDataGridView";
             networkInterfacesDataGridView.Size = new Size(776, 123);
             networkInterfacesDataGridView.TabIndex = 2;
+            networkInterfacesDataGridView.CellEnter += networkInterfacesDataGridView_CellEnter;
             // 
             // nam
             // 

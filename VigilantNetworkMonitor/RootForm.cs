@@ -14,20 +14,22 @@ namespace VigilantNetworkMonitor {
             packetDataGridView1.Load(optionsForm.GetNetworkInterfacesDataGridView());
         }
 
-        private void networkInterfacesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e) {
-            optionsForm.GetNetworkInterfacesDataGridView().OnClickedRow(e.RowIndex);
-        }
-
         private void sniffButton_Click(object sender, EventArgs e) {
+            MyCaptureDeviceWrapper? selectedCaptureDeviceWrapper =
+                optionsForm.GetNetworkInterfacesDataGridView().SelectedCaptureDeviceWrapper;
+            if (selectedCaptureDeviceWrapper == null) {
+                optionsForm.ShowDialog();
+                return;
+            }
+
             if (packetDataGridView1.IsSniffing()) {
-                optionsForm.GetNetworkInterfacesDataGridView().Enabled = true;
                 packetDataGridView1.StopSniffing();
             }
             else {
-                optionsForm.GetNetworkInterfacesDataGridView().Enabled = false;
                 packetDataGridView1.StartSniffing();
             }
 
+            optionsForm.GetNetworkInterfacesDataGridView().Enabled = !packetDataGridView1.IsSniffing();
             sniffButton.Text = packetDataGridView1.IsSniffing() ? "Stop" : "Sniff";
         }
 

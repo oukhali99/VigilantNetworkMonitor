@@ -1,3 +1,4 @@
+
 namespace VigilantNetworkMonitor {
     internal static class Program {
         /// <summary>

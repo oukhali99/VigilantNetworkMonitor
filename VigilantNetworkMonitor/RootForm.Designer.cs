@@ -34,6 +34,7 @@
             toolStripExit = new ToolStripMenuItem();
             tools = new ToolStripMenuItem();
             options = new ToolStripMenuItem();
+            statusStrip1 = new StatusStrip();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -120,11 +121,20 @@
             options.Text = "Options";
             options.Click += options_Click;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new Point(0, 428);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(800, 22);
+            statusStrip1.TabIndex = 4;
+            statusStrip1.Text = "statusStrip1";
+            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(statusStrip1);
             Controls.Add(sniffButton);
             Controls.Add(packetDataGridView1);
             Controls.Add(menuStrip);
@@ -152,5 +162,6 @@
         private ToolStripMenuItem toolStripExit;
         private ToolStripMenuItem tools;
         private ToolStripMenuItem options;
+        private StatusStrip statusStrip1;
     }
 }
