@@ -1,6 +1,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VigilantNetworkMonitor.PacketFilter;
 
 namespace VigilantNetworkMonitor {
     internal static class Program {
@@ -19,10 +20,10 @@ namespace VigilantNetworkMonitor {
                         services.AddTransient<OptionsForm>();
                         services.AddTransient<RootForm>();
                         services.AddSingleton<IPacketFilterService, PacketFilterService>();
+                        services.AddSingleton<IPacketFilterFactory, PacketFilterFactory>();
                     }
                 )
                 .Build();
-
             ApplicationConfiguration.Initialize();
             Application.Run(host.Services.GetRequiredService<RootForm>());
         }

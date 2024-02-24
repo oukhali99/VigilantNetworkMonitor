@@ -1,5 +1,6 @@
 ﻿
 using PacketDotNet;
+using VigilantNetworkMonitor.PacketFilter;
 
 namespace VigilantNetworkMonitor {
     public interface IPacketFilterService {
@@ -9,27 +10,23 @@ namespace VigilantNetworkMonitor {
     }
 
     public class PacketFilterService : IPacketFilterService {
-        private string? _filterString;
         private event EventHandler? _changedFilterString;
+        private IPacketFilter? _filter;
+        private readonly IPacketFilterFactory _packetFilterFactory;
+
+        public PacketFilterService(IPacketFilterFactory packetFilterFactory) {
+            _packetFilterFactory = packetFilterFactory;
+        }
 
         public bool Filter(MyPacketWrapper myPacketWrapper) {
-            if (_filterString == null) {
+            if (_filter == null) {
                 return true;
             }
-
-            if (_filterString.Contains("udp")) {
-                return myPacketWrapper.GetTransportPacket() is UdpPacket;
-            }
-
-            if (_filterString.Contains("tcp")) {
-                return myPacketWrapper.GetTransportPacket() is TcpPacket;
-            }
-
-            return true;
+            return _filter.Filter(myPacketWrapper);
         }
 
         public void SetFilterString(string filterString) {
-            _filterString = filterString;
+            _filter = _packetFilterFactory.ParseString(filterString);
             _changedFilterString?.Invoke(this, EventArgs.Empty);
         }
 
