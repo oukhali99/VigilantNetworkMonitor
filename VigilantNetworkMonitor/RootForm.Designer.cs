@@ -34,7 +34,6 @@
             toolStripExit = new ToolStripMenuItem();
             tools = new ToolStripMenuItem();
             options = new ToolStripMenuItem();
-            statusStrip1 = new StatusStrip();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -49,6 +48,7 @@
             packetDataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
             packetDataGridView1.Location = new Point(12, 56);
             packetDataGridView1.Name = "packetDataGridView1";
+            packetDataGridView1.ReadOnly = true;
             packetDataGridView1.Size = new Size(776, 382);
             packetDataGridView1.TabIndex = 0;
             // 
@@ -56,21 +56,25 @@
             // 
             sourceIp.HeaderText = "Source IP";
             sourceIp.Name = "sourceIp";
+            sourceIp.ReadOnly = true;
             // 
             // sourcePort
             // 
             sourcePort.HeaderText = "Source Port";
             sourcePort.Name = "sourcePort";
+            sourcePort.ReadOnly = true;
             // 
             // destinationIP
             // 
             destinationIP.HeaderText = "DestinationIP";
             destinationIP.Name = "destinationIP";
+            destinationIP.ReadOnly = true;
             // 
             // destinationPort
             // 
             destinationPort.HeaderText = "Destination Port";
             destinationPort.Name = "destinationPort";
+            destinationPort.ReadOnly = true;
             // 
             // sniffButton
             // 
@@ -121,20 +125,11 @@
             options.Text = "Options";
             options.Click += options_Click;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.Location = new Point(0, 428);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(800, 22);
-            statusStrip1.TabIndex = 4;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(statusStrip1);
             Controls.Add(sniffButton);
             Controls.Add(packetDataGridView1);
             Controls.Add(menuStrip);
@@ -162,6 +157,5 @@
         private ToolStripMenuItem toolStripExit;
         private ToolStripMenuItem tools;
         private ToolStripMenuItem options;
-        private StatusStrip statusStrip1;
     }
 }

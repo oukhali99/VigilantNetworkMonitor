@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VigilantNetworkMonitor {
     internal class PacketsDataGridView : DataGridView {
@@ -75,6 +76,7 @@ namespace VigilantNetworkMonitor {
                 myPacketWrapper.GetDestinationAddress(),
                 myPacketWrapper.GetDestinationPort()
             );
+            FirstDisplayedScrollingRowIndex = Rows.Count - 1;
         }
 
     }

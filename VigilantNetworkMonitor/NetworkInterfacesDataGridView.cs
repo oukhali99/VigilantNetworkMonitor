@@ -25,6 +25,7 @@ namespace VigilantNetworkMonitor {
         }
 
         public void Load() {
+            Rows.Clear();
             foreach (MyCaptureDeviceWrapper myCaptureDeviceWrapper in deviceList) {
                 Rows.Add(myCaptureDeviceWrapper.FriendlyName, myCaptureDeviceWrapper.IpAddress);
             }
