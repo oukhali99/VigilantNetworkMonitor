@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            networkInterfacesDataGridView = new NetworkInterfacesDataGridView();
+            networkInterfacesDataGridView = new NetworkInterfacesDataGridView(_networkOptions);
             nam = new DataGridViewTextBoxColumn();
             description = new DataGridViewTextBoxColumn();
             tabControl1 = new TabControl();
@@ -101,6 +101,7 @@
             Controls.Add(tabControl1);
             Name = "OptionsForm";
             Text = "OptionsForm";
+            FormClosing += OptionsForm_FormClosing;
             Load += OptionsForm_Load;
             ((System.ComponentModel.ISupportInitialize)networkInterfacesDataGridView).EndInit();
             tabControl1.ResumeLayout(false);

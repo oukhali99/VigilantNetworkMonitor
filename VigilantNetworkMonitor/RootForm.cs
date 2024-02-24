@@ -1,24 +1,25 @@
-using System.Windows.Forms;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace VigilantNetworkMonitor {
     public partial class RootForm : Form {
 
-        private OptionsForm optionsForm;
+        private readonly INetworkOptions _networkOptions;
+        private readonly IServiceProvider _serviceProvider;
 
-        public RootForm() {
+        public RootForm(INetworkOptions networkOptions, IServiceProvider serviceProvider) {
+            _networkOptions = networkOptions;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
-            optionsForm = new OptionsForm();
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
-            packetDataGridView1.Load(optionsForm.GetNetworkInterfacesDataGridView());
         }
 
         private void sniffButton_Click(object sender, EventArgs e) {
-            MyCaptureDeviceWrapper? selectedCaptureDeviceWrapper =
-                optionsForm.GetNetworkInterfacesDataGridView().SelectedCaptureDeviceWrapper;
+            MyCaptureDeviceWrapper? selectedCaptureDeviceWrapper = _networkOptions.GetSelectedCaptureDeviceWrapper();
             if (selectedCaptureDeviceWrapper == null) {
-                optionsForm.ShowDialog();
+                _serviceProvider.GetRequiredService<OptionsForm>().ShowDialog();
                 return;
             }
 
@@ -29,7 +30,6 @@ namespace VigilantNetworkMonitor {
                 packetDataGridView1.StartSniffing();
             }
 
-            optionsForm.GetNetworkInterfacesDataGridView().Enabled = !packetDataGridView1.IsSniffing();
             sniffButton.Text = packetDataGridView1.IsSniffing() ? "Stop" : "Sniff";
         }
 
@@ -38,7 +38,7 @@ namespace VigilantNetworkMonitor {
         }
 
         private void options_Click(object sender, EventArgs e) {
-            optionsForm.ShowDialog();
+            _serviceProvider.GetRequiredService<OptionsForm>().ShowDialog();
         }
     }
 }

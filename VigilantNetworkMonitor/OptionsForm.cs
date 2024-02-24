@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿
 namespace VigilantNetworkMonitor {
     public partial class OptionsForm : Form {
-        public OptionsForm() {
+
+        private readonly INetworkOptions _networkOptions;
+
+        public OptionsForm(INetworkOptions networkOptions) {
+            _networkOptions = networkOptions;
             InitializeComponent();
         }
 
@@ -25,5 +20,10 @@ namespace VigilantNetworkMonitor {
         private void networkInterfacesDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e) {
             networkInterfacesDataGridView.OnClickedRow(e.RowIndex);
         }
+
+        private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
+            Dispose();
+        }
+
     }
 }

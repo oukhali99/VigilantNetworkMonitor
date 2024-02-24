@@ -1,31 +1,21 @@
 ﻿using PacketDotNet;
-using PacketDotNet.Ieee80211;
 using SharpPcap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace VigilantNetworkMonitor {
-    internal class PacketsDataGridView : DataGridView {
+    public class PacketsDataGridView : DataGridView {
 
-        private NetworkInterfacesDataGridView? networkInterfacesDataGridView;
+        private readonly INetworkOptions _networkOptions;
 
-        public void Load(NetworkInterfacesDataGridView networkInterfacesDataGridView) {
-            this.networkInterfacesDataGridView = networkInterfacesDataGridView;
+        public PacketsDataGridView(INetworkOptions networkOptions) {
+            _networkOptions = networkOptions;
         }
 
         public void StartSniffing() {
-            if (networkInterfacesDataGridView == null) {
-                return;
-            }
-            if (networkInterfacesDataGridView.SelectedCaptureDeviceWrapper == null) {
+            MyCaptureDeviceWrapper? myCaptureDeviceWrapper = _networkOptions.GetSelectedCaptureDeviceWrapper();
+            if (myCaptureDeviceWrapper == null) {
                 return;
             }
 
-            MyCaptureDeviceWrapper myCaptureDeviceWrapper = networkInterfacesDataGridView.SelectedCaptureDeviceWrapper;
             if (myCaptureDeviceWrapper.IsStarted()) {
                 myCaptureDeviceWrapper.StopCapture();
             }
@@ -36,11 +26,7 @@ namespace VigilantNetworkMonitor {
         }
 
         public void StopSniffing() {
-            if (networkInterfacesDataGridView == null) {
-                return;
-            }
-
-            MyCaptureDeviceWrapper? myCaptureDeviceWrapper = networkInterfacesDataGridView.SelectedCaptureDeviceWrapper;
+            MyCaptureDeviceWrapper? myCaptureDeviceWrapper = _networkOptions.GetSelectedCaptureDeviceWrapper();
             if (myCaptureDeviceWrapper == null) {
                 return;
             }
@@ -50,13 +36,11 @@ namespace VigilantNetworkMonitor {
         }
 
         public bool IsSniffing() {
-            if (networkInterfacesDataGridView == null) {
-                return false;
+            MyCaptureDeviceWrapper? myCaptureDeviceWrapper = _networkOptions.GetSelectedCaptureDeviceWrapper();
+            if (myCaptureDeviceWrapper == null) {
+                return false; ;
             }
-            if (networkInterfacesDataGridView.SelectedCaptureDeviceWrapper == null) {
-                return false;
-            }
-            return networkInterfacesDataGridView.SelectedCaptureDeviceWrapper.IsStarted();
+            return myCaptureDeviceWrapper.IsStarted();
         }
 
         private void handlePacket(object s, PacketCapture e) {

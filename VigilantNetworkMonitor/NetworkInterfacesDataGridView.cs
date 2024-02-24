@@ -1,40 +1,23 @@
 ﻿using SharpPcap;
 
 namespace VigilantNetworkMonitor {
-    internal class NetworkInterfacesDataGridView : DataGridView {
+    public class NetworkInterfacesDataGridView : DataGridView {
 
-        private ICollection<MyCaptureDeviceWrapper> deviceList;
+        private readonly INetworkOptions _networkOptions;
 
-        public MyCaptureDeviceWrapper? SelectedCaptureDeviceWrapper { get; private set; }
-
-        public NetworkInterfacesDataGridView() {
-            deviceList = new LinkedList<MyCaptureDeviceWrapper>();
-            CaptureDeviceList devices = CaptureDeviceList.Instance;
-            foreach (ICaptureDevice dev in devices) {
-                MyCaptureDeviceWrapper myCaptureDeviceWrapper = new MyCaptureDeviceWrapper(dev);
-                if (myCaptureDeviceWrapper.IpAddress == null) {
-                    continue;
-                }
-
-                deviceList.Add(myCaptureDeviceWrapper);
-
-                if (myCaptureDeviceWrapper.GetName().Equals(Properties.Settings.Default.SelectedCaptureDeviceName)) {
-                    SelectedCaptureDeviceWrapper = myCaptureDeviceWrapper;
-                }
-            }
+        public NetworkInterfacesDataGridView(INetworkOptions networkOptions) {
+            _networkOptions = networkOptions;
         }
 
         public void Load() {
-            Rows.Clear();
-            foreach (MyCaptureDeviceWrapper myCaptureDeviceWrapper in deviceList) {
+            foreach (MyCaptureDeviceWrapper myCaptureDeviceWrapper in _networkOptions.GetDeviceList()) {
                 Rows.Add(myCaptureDeviceWrapper.FriendlyName, myCaptureDeviceWrapper.IpAddress);
             }
         }
 
         public void OnClickedRow(int rowIndex) {
-            SelectedCaptureDeviceWrapper = deviceList.ElementAt(rowIndex);
-            Properties.Settings.Default.SelectedCaptureDeviceName = SelectedCaptureDeviceWrapper.GetName();
-            Properties.Settings.Default.Save();
+            MyCaptureDeviceWrapper selectedCaptureDeviceWrapper = _networkOptions.GetDeviceList().ElementAt(rowIndex);
+            _networkOptions.SetSelectedCaptureDeviceWrapper(selectedCaptureDeviceWrapper);
         }
 
     }
