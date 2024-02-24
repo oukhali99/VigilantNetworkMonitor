@@ -5,11 +5,18 @@ namespace VigilantNetworkMonitor {
     public class PacketsDataGridView : DataGridView {
 
         private INetworkOptions? _networkOptions;
-        private IPacketFilterService _packetFilterService;
+        private IPacketFilterService? _packetFilterService;
+        private ICollection<MyPacketWrapper> packets;
+
+        public PacketsDataGridView() {
+            packets = new LinkedList<MyPacketWrapper>();
+        }
 
         public void Load(INetworkOptions networkOptions, IPacketFilterService packetFilterService) {
             _packetFilterService = packetFilterService;
             _networkOptions = networkOptions;
+
+            _packetFilterService.AddChangedFilterStringEventHandler(onFilterChanged);
         }
 
         public void StartSniffing() {
@@ -58,6 +65,10 @@ namespace VigilantNetworkMonitor {
         }
 
         private void handlePacket(object s, PacketCapture e) {
+            if (_packetFilterService == null) {
+                return;
+            }
+
             Packet packet = Packet.ParsePacket(e.GetPacket().LinkLayerType, e.GetPacket().Data);
             MyPacketWrapper myPacketWrapper = new MyPacketWrapper(packet);
 
@@ -65,6 +76,7 @@ namespace VigilantNetworkMonitor {
                 return;
             }
 
+            packets.Add(myPacketWrapper);
             AddPacket(myPacketWrapper);
         }
 
@@ -81,6 +93,24 @@ namespace VigilantNetworkMonitor {
                 myPacketWrapper.GetProtocol()
             );
             FirstDisplayedScrollingRowIndex = Rows.Count - 1;
+        }
+
+        private void onFilterChanged(object? sender, EventArgs e) {
+            if (_packetFilterService == null) {
+                return;
+            }
+            if (InvokeRequired) {
+                Invoke(new Action(() => onFilterChanged(sender, e)));
+                return;
+            }
+            Rows.Clear();
+            foreach (MyPacketWrapper myPacketWrapper in packets) {
+                if (!_packetFilterService.Filter(myPacketWrapper)) {
+                    continue;
+                }
+
+                AddPacket(myPacketWrapper);
+            }
         }
 
     }
