@@ -18,6 +18,7 @@ namespace VigilantNetworkMonitor {
                         services.AddSingleton<INetworkOptions, NetworkOptions>();
                         services.AddTransient<OptionsForm>();
                         services.AddTransient<RootForm>();
+                        services.AddSingleton<IPacketFilterService, PacketFilterService>();
                     }
                 )
                 .Build();

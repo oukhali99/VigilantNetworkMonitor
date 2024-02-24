@@ -5,8 +5,10 @@ namespace VigilantNetworkMonitor {
     public class PacketsDataGridView : DataGridView {
 
         private INetworkOptions? _networkOptions;
+        private IPacketFilterService _packetFilterService;
 
-        public void Load(INetworkOptions networkOptions) {
+        public void Load(INetworkOptions networkOptions, IPacketFilterService packetFilterService) {
+            _packetFilterService = packetFilterService;
             _networkOptions = networkOptions;
         }
 
@@ -58,6 +60,11 @@ namespace VigilantNetworkMonitor {
         private void handlePacket(object s, PacketCapture e) {
             Packet packet = Packet.ParsePacket(e.GetPacket().LinkLayerType, e.GetPacket().Data);
             MyPacketWrapper myPacketWrapper = new MyPacketWrapper(packet);
+
+            if (!_packetFilterService.Filter(myPacketWrapper)) {
+                return;
+            }
+
             AddPacket(myPacketWrapper);
         }
 
@@ -70,7 +77,8 @@ namespace VigilantNetworkMonitor {
                 myPacketWrapper.GetSourceAddress(),
                 myPacketWrapper.GetSourcePort(),
                 myPacketWrapper.GetDestinationAddress(),
-                myPacketWrapper.GetDestinationPort()
+                myPacketWrapper.GetDestinationPort(),
+                myPacketWrapper.GetProtocol()
             );
             FirstDisplayedScrollingRowIndex = Rows.Count - 1;
         }

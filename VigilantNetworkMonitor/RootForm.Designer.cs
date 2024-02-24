@@ -24,16 +24,20 @@
         /// </summary>
         private void InitializeComponent() {
             packetDataGridView1 = new PacketsDataGridView();
-            sourceIp = new DataGridViewTextBoxColumn();
-            sourcePort = new DataGridViewTextBoxColumn();
-            destinationIP = new DataGridViewTextBoxColumn();
-            destinationPort = new DataGridViewTextBoxColumn();
             sniffButton = new Button();
             menuStrip = new MenuStrip();
             file = new ToolStripMenuItem();
             toolStripExit = new ToolStripMenuItem();
             tools = new ToolStripMenuItem();
             options = new ToolStripMenuItem();
+            filterTextBox = new TextBox();
+            label1 = new Label();
+            applyFilterButton = new Button();
+            sourceIp = new DataGridViewTextBoxColumn();
+            sourcePort = new DataGridViewTextBoxColumn();
+            destinationIP = new DataGridViewTextBoxColumn();
+            destinationPort = new DataGridViewTextBoxColumn();
+            protocol = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -44,37 +48,13 @@
             packetDataGridView1.AllowUserToDeleteRows = false;
             packetDataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             packetDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            packetDataGridView1.Columns.AddRange(new DataGridViewColumn[] { sourceIp, sourcePort, destinationIP, destinationPort });
+            packetDataGridView1.Columns.AddRange(new DataGridViewColumn[] { sourceIp, sourcePort, destinationIP, destinationPort, protocol });
             packetDataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
             packetDataGridView1.Location = new Point(12, 56);
             packetDataGridView1.Name = "packetDataGridView1";
             packetDataGridView1.ReadOnly = true;
             packetDataGridView1.Size = new Size(776, 382);
             packetDataGridView1.TabIndex = 0;
-            // 
-            // sourceIp
-            // 
-            sourceIp.HeaderText = "Source IP";
-            sourceIp.Name = "sourceIp";
-            sourceIp.ReadOnly = true;
-            // 
-            // sourcePort
-            // 
-            sourcePort.HeaderText = "Source Port";
-            sourcePort.Name = "sourcePort";
-            sourcePort.ReadOnly = true;
-            // 
-            // destinationIP
-            // 
-            destinationIP.HeaderText = "DestinationIP";
-            destinationIP.Name = "destinationIP";
-            destinationIP.ReadOnly = true;
-            // 
-            // destinationPort
-            // 
-            destinationPort.HeaderText = "Destination Port";
-            destinationPort.Name = "destinationPort";
-            destinationPort.ReadOnly = true;
             // 
             // sniffButton
             // 
@@ -125,11 +105,70 @@
             options.Text = "Options";
             options.Click += options_Click;
             // 
+            // filterTextBox
+            // 
+            filterTextBox.Location = new Point(51, 27);
+            filterTextBox.Name = "filterTextBox";
+            filterTextBox.Size = new Size(615, 23);
+            filterTextBox.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 31);
+            label1.Name = "label1";
+            label1.Size = new Size(33, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Filter";
+            // 
+            // applyFilterButton
+            // 
+            applyFilterButton.Location = new Point(672, 27);
+            applyFilterButton.Name = "applyFilterButton";
+            applyFilterButton.Size = new Size(55, 23);
+            applyFilterButton.TabIndex = 6;
+            applyFilterButton.Text = "Apply";
+            applyFilterButton.UseVisualStyleBackColor = true;
+            applyFilterButton.Click += applyFilterButton_Click;
+            // 
+            // sourceIp
+            // 
+            sourceIp.HeaderText = "Source IP";
+            sourceIp.Name = "sourceIp";
+            sourceIp.ReadOnly = true;
+            // 
+            // sourcePort
+            // 
+            sourcePort.HeaderText = "Source Port";
+            sourcePort.Name = "sourcePort";
+            sourcePort.ReadOnly = true;
+            // 
+            // destinationIP
+            // 
+            destinationIP.HeaderText = "DestinationIP";
+            destinationIP.Name = "destinationIP";
+            destinationIP.ReadOnly = true;
+            // 
+            // destinationPort
+            // 
+            destinationPort.HeaderText = "Destination Port";
+            destinationPort.Name = "destinationPort";
+            destinationPort.ReadOnly = true;
+            // 
+            // protocol
+            // 
+            protocol.HeaderText = "Protocol";
+            protocol.Name = "protocol";
+            protocol.ReadOnly = true;
+            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(applyFilterButton);
+            Controls.Add(label1);
+            Controls.Add(filterTextBox);
             Controls.Add(sniffButton);
             Controls.Add(packetDataGridView1);
             Controls.Add(menuStrip);
@@ -148,14 +187,18 @@
 
         private PacketsDataGridView packetDataGridView1;
         private Button sniffButton;
-        private DataGridViewTextBoxColumn sourceIp;
-        private DataGridViewTextBoxColumn sourcePort;
-        private DataGridViewTextBoxColumn destinationIP;
-        private DataGridViewTextBoxColumn destinationPort;
         private MenuStrip menuStrip;
         private ToolStripMenuItem file;
         private ToolStripMenuItem toolStripExit;
         private ToolStripMenuItem tools;
         private ToolStripMenuItem options;
+        private TextBox filterTextBox;
+        private Label label1;
+        private Button applyFilterButton;
+        private DataGridViewTextBoxColumn sourceIp;
+        private DataGridViewTextBoxColumn sourcePort;
+        private DataGridViewTextBoxColumn destinationIP;
+        private DataGridViewTextBoxColumn destinationPort;
+        private DataGridViewTextBoxColumn protocol;
     }
 }

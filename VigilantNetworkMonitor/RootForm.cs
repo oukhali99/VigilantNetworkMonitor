@@ -6,15 +6,21 @@ namespace VigilantNetworkMonitor {
 
         private readonly INetworkOptions _networkOptions;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IPacketFilterService _packetFilterService;
 
-        public RootForm(INetworkOptions networkOptions, IServiceProvider serviceProvider) {
+        public RootForm(
+            INetworkOptions networkOptions,
+            IServiceProvider serviceProvider,
+            IPacketFilterService packetFilterService
+        ) {
             _networkOptions = networkOptions;
             _serviceProvider = serviceProvider;
+            _packetFilterService = packetFilterService;
             InitializeComponent();
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
-            packetDataGridView1.Load(_networkOptions);
+            packetDataGridView1.Load(_networkOptions, _packetFilterService);
         }
 
         private void sniffButton_Click(object sender, EventArgs e) {
@@ -40,6 +46,10 @@ namespace VigilantNetworkMonitor {
 
         private void options_Click(object sender, EventArgs e) {
             _serviceProvider.GetRequiredService<OptionsForm>().ShowDialog();
+        }
+
+        private void applyFilterButton_Click(object sender, EventArgs e) {
+            _packetFilterService.SetFilterString(filterTextBox.Text);
         }
     }
 }
