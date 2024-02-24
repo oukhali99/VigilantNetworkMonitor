@@ -14,6 +14,7 @@ namespace VigilantNetworkMonitor {
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
+            packetDataGridView1.Load(_networkOptions);
         }
 
         private void sniffButton_Click(object sender, EventArgs e) {

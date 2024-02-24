@@ -23,7 +23,7 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            packetDataGridView1 = new PacketsDataGridView(_networkOptions);
+            packetDataGridView1 = new PacketsDataGridView();
             sourceIp = new DataGridViewTextBoxColumn();
             sourcePort = new DataGridViewTextBoxColumn();
             destinationIP = new DataGridViewTextBoxColumn();

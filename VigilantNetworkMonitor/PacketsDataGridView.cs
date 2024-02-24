@@ -4,13 +4,17 @@ using SharpPcap;
 namespace VigilantNetworkMonitor {
     public class PacketsDataGridView : DataGridView {
 
-        private readonly INetworkOptions _networkOptions;
+        private INetworkOptions? _networkOptions;
 
-        public PacketsDataGridView(INetworkOptions networkOptions) {
+        public void Load(INetworkOptions networkOptions) {
             _networkOptions = networkOptions;
         }
 
         public void StartSniffing() {
+            if (_networkOptions == null) {
+                return;
+            }
+
             MyCaptureDeviceWrapper? myCaptureDeviceWrapper = _networkOptions.GetSelectedCaptureDeviceWrapper();
             if (myCaptureDeviceWrapper == null) {
                 return;
@@ -26,6 +30,10 @@ namespace VigilantNetworkMonitor {
         }
 
         public void StopSniffing() {
+            if (_networkOptions == null) {
+                return;
+            }
+
             MyCaptureDeviceWrapper? myCaptureDeviceWrapper = _networkOptions.GetSelectedCaptureDeviceWrapper();
             if (myCaptureDeviceWrapper == null) {
                 return;
@@ -36,6 +44,10 @@ namespace VigilantNetworkMonitor {
         }
 
         public bool IsSniffing() {
+            if (_networkOptions == null) {
+                return false;
+            }
+
             MyCaptureDeviceWrapper? myCaptureDeviceWrapper = _networkOptions.GetSelectedCaptureDeviceWrapper();
             if (myCaptureDeviceWrapper == null) {
                 return false; ;

@@ -10,7 +10,7 @@ namespace VigilantNetworkMonitor {
         }
 
         private void OptionsForm_Load(object sender, EventArgs e) {
-            networkInterfacesDataGridView.Load();
+            networkInterfacesDataGridView.Load(_networkOptions);
         }
 
         internal NetworkInterfacesDataGridView GetNetworkInterfacesDataGridView() {

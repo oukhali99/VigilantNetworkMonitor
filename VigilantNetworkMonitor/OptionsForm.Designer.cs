@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            networkInterfacesDataGridView = new NetworkInterfacesDataGridView(_networkOptions);
+            networkInterfacesDataGridView = new NetworkInterfacesDataGridView();
             nam = new DataGridViewTextBoxColumn();
             description = new DataGridViewTextBoxColumn();
             tabControl1 = new TabControl();
