@@ -26,20 +26,20 @@ namespace VigilantNetworkMonitor {
             return ipPacket.DestinationAddress;
         }
 
-        public ushort? GetSourcePort() {
+        public MyNumberWrapper? GetSourcePort() {
             TransportPacket? transportPacket = GetTransportPacket();
             if (transportPacket == null) {
                 return null;
             }
-            return transportPacket.SourcePort;
+            return new MyNumberWrapper(transportPacket.SourcePort);
         }
 
-        public ushort? GetDestinationPort() {
+        public MyNumberWrapper? GetDestinationPort() {
             TransportPacket? transportPacket = GetTransportPacket();
             if (transportPacket == null) {
                 return null;
             }
-            return transportPacket.DestinationPort;
+            return new MyNumberWrapper(transportPacket.DestinationPort);
         }
 
         private IPPacket? getIpPacket() {

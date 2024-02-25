@@ -14,16 +14,9 @@ namespace VigilantNetworkMonitor.PacketVariable.Factory {
                 return new SourcePortPacketVariable();
             }
 
-            try {
-                return new ConstantPacketVariable(ushort.Parse(variableString));
-            }
-            catch (Exception) {
-            }
-
-            try {
-                return new ConstantPacketVariable(float.Parse(variableString));
-            }
-            catch (Exception) {
+            MyNumberWrapper? myNumberWrapper = MyNumberWrapper.Parse(variableString);
+            if (myNumberWrapper != null) {
+                return new ConstantPacketVariable(myNumberWrapper);
             }
 
             return null;

@@ -2,13 +2,13 @@
 
 namespace VigilantNetworkMonitor.PacketVariable {
     internal class ConstantPacketVariable : BasePacketVariable {
-        private readonly IComparable _value;
+        private readonly MyNumberWrapper _value;
 
-        public ConstantPacketVariable(IComparable value) {
+        public ConstantPacketVariable(MyNumberWrapper value) {
             _value = value;
         }
 
-        public override IComparable? GetValue(MyPacketWrapper myPacketWrapper) {
+        public override MyNumberWrapper? GetValue(MyPacketWrapper myPacketWrapper) {
             return _value;
         }
 

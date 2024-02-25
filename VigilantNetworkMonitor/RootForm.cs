@@ -58,7 +58,7 @@ namespace VigilantNetworkMonitor {
                 return;
             }
             toolStripErrorLabel.Text = "";
-            filterTextBox.Text = filter.GetFilterString();
+            //filterTextBox.Text = filter.GetFilterString();
         }
     }
 }
