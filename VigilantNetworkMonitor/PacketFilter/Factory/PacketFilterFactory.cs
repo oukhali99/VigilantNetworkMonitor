@@ -2,7 +2,6 @@
 using VigilantNetworkMonitor.Condition.Service;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.VariableComparison;
-using VigilantNetworkMonitor.PacketFilter.VariableComparison.Base;
 using VigilantNetworkMonitor.PacketVariable.Base;
 using VigilantNetworkMonitor.PacketVariable.Factory;
 
@@ -164,7 +163,7 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory {
             }
 
             IPacketVariable? var1 = _packetVariableFactory.Parse(stringVariables[0]);
-            IPacketVariable? var2 =  _packetVariableFactory.Parse(stringVariables[1]);
+            IPacketVariable? var2 = _packetVariableFactory.Parse(stringVariables[1]);
             if (var1 == null || var2 == null) {
                 return null;
             }

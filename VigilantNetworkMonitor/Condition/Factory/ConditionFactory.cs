@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VigilantNetworkMonitor.Comparator.Base;
+﻿using VigilantNetworkMonitor.Comparator.Base;
 
 namespace VigilantNetworkMonitor.Condition.Service {
     public interface IConditionFactory {
