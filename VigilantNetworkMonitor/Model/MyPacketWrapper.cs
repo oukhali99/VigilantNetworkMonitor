@@ -1,7 +1,7 @@
 ﻿using PacketDotNet;
 using System.Net;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor.Model {
     public class MyPacketWrapper {
 
         private Packet innerPacket;

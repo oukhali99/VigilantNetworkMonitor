@@ -1,4 +1,5 @@
 ﻿using VigilantNetworkMonitor.Comparator.Base;
+using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketFilter.VariableComparison.Base;
 using VigilantNetworkMonitor.PacketVariable.Base;
 

@@ -1,10 +1,5 @@
-﻿using VigilantNetworkMonitor.Comparator.Base;
-using VigilantNetworkMonitor.Condition.Service;
-using VigilantNetworkMonitor.PacketFilter.Base;
-using VigilantNetworkMonitor.PacketFilter.VariableComparison;
+﻿using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.VariableCondition.Factory;
-using VigilantNetworkMonitor.PacketVariable.Base;
-using VigilantNetworkMonitor.PacketVariable.Factory;
 
 namespace VigilantNetworkMonitor.PacketFilter.Factory {
     public interface IPacketFilterFactory {

@@ -1,4 +1,5 @@
-﻿using VigilantNetworkMonitor.PacketFilter.Base;
+﻿using VigilantNetworkMonitor.Model;
+using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Factory;
 
 namespace VigilantNetworkMonitor.PacketFilter.Service {

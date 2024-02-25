@@ -1,4 +1,5 @@
 ﻿using SharpPcap;
+using VigilantNetworkMonitor.Model;
 
 namespace VigilantNetworkMonitor {
 

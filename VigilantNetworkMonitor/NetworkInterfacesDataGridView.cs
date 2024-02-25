@@ -1,4 +1,6 @@
-﻿namespace VigilantNetworkMonitor {
+﻿using VigilantNetworkMonitor.Model;
+
+namespace VigilantNetworkMonitor {
     public class NetworkInterfacesDataGridView : DataGridView {
 
         private INetworkOptions? _networkOptions;

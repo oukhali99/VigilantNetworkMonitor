@@ -1,32 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using VigilantNetworkMonitor.PacketVariable;
+﻿using System.Net;
 
-namespace VigilantNetworkMonitor {
-    public class MyNumberWrapper : IComparable {
+namespace VigilantNetworkMonitor.Model {
+    public class MyQuantifiableValueWrapper : IComparable {
         private double _value;
 
-        public MyNumberWrapper(double value) {
+        public MyQuantifiableValueWrapper(double value) {
             _value = value;
         }
 
-        public MyNumberWrapper(float value) {
+        public MyQuantifiableValueWrapper(float value) {
             _value = value;
         }
 
-        public MyNumberWrapper(int value) {
+        public MyQuantifiableValueWrapper(int value) {
             _value = value;
         }
 
-        public MyNumberWrapper(ushort value) {
+        public MyQuantifiableValueWrapper(ushort value) {
             _value = value;
         }
 
-        public MyNumberWrapper(IPAddress ipAddress) {
+        public MyQuantifiableValueWrapper(IPAddress ipAddress) {
             _value = 0;
             byte[] bytes = ipAddress.GetAddressBytes();
             for (int i = 0; i < bytes.Length; i++) {
@@ -36,8 +30,8 @@ namespace VigilantNetworkMonitor {
 
         public int CompareTo(object? obj) {
             if (obj != null) {
-                if (obj is MyNumberWrapper) {
-                    MyNumberWrapper myNumberWrapperObj = (MyNumberWrapper)obj;
+                if (obj is MyQuantifiableValueWrapper) {
+                    MyQuantifiableValueWrapper myNumberWrapperObj = (MyQuantifiableValueWrapper)obj;
                     return _value.CompareTo(myNumberWrapperObj._value);
                 }
             }
@@ -49,19 +43,19 @@ namespace VigilantNetworkMonitor {
             return _value.ToString();
         }
 
-        public static MyNumberWrapper? Parse(string stringToParse) {
+        public static MyQuantifiableValueWrapper? Parse(string stringToParse) {
             try {
-                return new MyNumberWrapper(int.Parse(stringToParse));
+                return new MyQuantifiableValueWrapper(int.Parse(stringToParse));
             }
             catch (Exception) {
             }
             try {
-                return new MyNumberWrapper(double.Parse(stringToParse));
+                return new MyQuantifiableValueWrapper(double.Parse(stringToParse));
             }
             catch (Exception) {
             }
             try {
-                return new MyNumberWrapper(IPAddress.Parse(stringToParse));
+                return new MyQuantifiableValueWrapper(IPAddress.Parse(stringToParse));
             }
             catch (Exception) {
             }

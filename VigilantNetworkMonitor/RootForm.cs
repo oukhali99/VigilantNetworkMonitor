@@ -1,5 +1,6 @@
 
 using Microsoft.Extensions.DependencyInjection;
+using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Service;
 

@@ -1,4 +1,5 @@
-﻿using VigilantNetworkMonitor.PacketVariable.Base;
+﻿using VigilantNetworkMonitor.Model;
+using VigilantNetworkMonitor.PacketVariable.Base;
 
 namespace VigilantNetworkMonitor.PacketVariable.Factory {
     public interface IPacketVariableFactory {
@@ -20,7 +21,7 @@ namespace VigilantNetworkMonitor.PacketVariable.Factory {
                 return new DestinationAddressPacketVariable();
             }
 
-            MyNumberWrapper? myNumberWrapper = MyNumberWrapper.Parse(variableString);
+            MyQuantifiableValueWrapper? myNumberWrapper = MyQuantifiableValueWrapper.Parse(variableString);
             if (myNumberWrapper != null) {
                 return new ConstantPacketVariable(myNumberWrapper);
             }

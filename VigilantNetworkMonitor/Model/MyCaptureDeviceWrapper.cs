@@ -1,6 +1,6 @@
 ﻿using SharpPcap;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor.Model {
     public class MyCaptureDeviceWrapper {
 
         private ICaptureDevice _captureDevice;

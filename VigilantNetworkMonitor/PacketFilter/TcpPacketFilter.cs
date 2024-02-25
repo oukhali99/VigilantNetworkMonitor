@@ -1,4 +1,5 @@
 ﻿using PacketDotNet;
+using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketFilter.Base;
 
 namespace VigilantNetworkMonitor.PacketFilter {

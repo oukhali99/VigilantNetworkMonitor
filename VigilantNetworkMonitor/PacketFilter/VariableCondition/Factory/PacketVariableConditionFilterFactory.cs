@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VigilantNetworkMonitor.Comparator.Base;
+﻿using VigilantNetworkMonitor.Comparator.Base;
 using VigilantNetworkMonitor.Condition.Service;
-using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.VariableComparison;
 using VigilantNetworkMonitor.PacketFilter.VariableComparison.Base;
 using VigilantNetworkMonitor.PacketVariable.Base;
@@ -20,8 +14,7 @@ namespace VigilantNetworkMonitor.PacketFilter.VariableCondition.Factory {
         private readonly IConditionFactory _conditionFactory;
         private readonly IPacketVariableFactory _packetVariableFactory;
 
-        public PacketVariableConditionFilterFactory(IConditionFactory conditionFactory, IPacketVariableFactory packetVariableFactory)
-        {
+        public PacketVariableConditionFilterFactory(IConditionFactory conditionFactory, IPacketVariableFactory packetVariableFactory) {
             _conditionFactory = conditionFactory;
             _packetVariableFactory = packetVariableFactory;
         }

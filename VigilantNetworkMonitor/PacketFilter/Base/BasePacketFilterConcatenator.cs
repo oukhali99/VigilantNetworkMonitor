@@ -1,4 +1,6 @@
-﻿namespace VigilantNetworkMonitor.PacketFilter.Base {
+﻿using VigilantNetworkMonitor.Model;
+
+namespace VigilantNetworkMonitor.PacketFilter.Base {
     internal abstract class BasePacketFilterConcatenator : IPacketFilter {
         protected IPacketFilter[] _filters { get; }
 

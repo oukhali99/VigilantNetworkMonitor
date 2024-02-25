@@ -1,4 +1,6 @@
-﻿namespace VigilantNetworkMonitor.PacketVariable.Base {
+﻿using VigilantNetworkMonitor.Model;
+
+namespace VigilantNetworkMonitor.PacketVariable.Base {
 
     public interface IPacketVariable {
         IComparable? GetValue(MyPacketWrapper myPacketWrapper);

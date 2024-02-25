@@ -1,5 +1,6 @@
 ﻿using PacketDotNet;
 using SharpPcap;
+using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketFilter.Service;
 
 namespace VigilantNetworkMonitor {

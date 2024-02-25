@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketVariable.Base;
 
 namespace VigilantNetworkMonitor.PacketVariable {
     internal class SourceAddressPacketVariable : BasePacketVariable {
         public const string VARIABLE_NAME = "src_addr";
 
-        public override MyNumberWrapper? GetValue(MyPacketWrapper myPacketWrapper) {
+        public override MyQuantifiableValueWrapper? GetValue(MyPacketWrapper myPacketWrapper) {
             IPAddress? sourceAddress = myPacketWrapper.GetSourceAddress();
             if (sourceAddress == null) {
                 return null;
             }
-            return new MyNumberWrapper(sourceAddress);
+            return new MyQuantifiableValueWrapper(sourceAddress);
         }
 
         public override Type GetValueType() {
-            return typeof(MyNumberWrapper);
+            return typeof(MyQuantifiableValueWrapper);
         }
 
         public override string GetVariableName() {
