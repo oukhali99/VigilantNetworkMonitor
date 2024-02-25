@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 using VigilantNetworkMonitor.PacketFilter.Base;
 
 namespace VigilantNetworkMonitor.PacketFilter.VariableComparison.Base {
-    internal interface IPacketVariableComparisonFilter : IPacketFilter {
+    internal interface IPacketVariableConditionFilter : IPacketFilter {
     }
 }

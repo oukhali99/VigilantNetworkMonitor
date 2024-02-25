@@ -9,13 +9,13 @@ using VigilantNetworkMonitor.PacketVariable.Base;
 
 namespace VigilantNetworkMonitor.PacketFilter.VariableComparison
 {
-    internal class PacketVariableComparisonFilter : IPacketVariableComparisonFilter
+    internal class PacketVariableConditionFilter : IPacketVariableConditionFilter
     {
         private readonly IPacketVariable _variable1;
         private readonly ICondition _condition;
         private readonly IPacketVariable _variable2;
 
-        internal PacketVariableComparisonFilter(
+        internal PacketVariableConditionFilter(
             IPacketVariable variable1,
             ICondition condition,
             IPacketVariable variable2

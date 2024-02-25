@@ -1,5 +1,4 @@
 ﻿using VigilantNetworkMonitor.Comparator.Base;
-using VigilantNetworkMonitor.Comparison.Factory;
 using VigilantNetworkMonitor.Condition.Service;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.VariableComparison;
@@ -170,7 +169,7 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory {
                 return null;
             }
 
-            return new PacketVariableComparisonFilter(var1, conditionOperator, var2);
+            return new PacketVariableConditionFilter(var1, conditionOperator, var2);
         }
     }
 }

@@ -1,7 +1,6 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using VigilantNetworkMonitor.Comparison.Factory;
 using VigilantNetworkMonitor.Condition.Service;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Factory;
@@ -26,7 +25,6 @@ namespace VigilantNetworkMonitor {
                         services.AddTransient<RootForm>();
                         services.AddSingleton<IPacketFilterService, PacketFilterService>();
                         services.AddSingleton<IPacketFilterFactory, PacketFilterFactory>();
-                        services.AddSingleton<IComparisonFactory, ComparisonFactory>();
                         services.AddSingleton<IConditionFactory, ConditionFactory>();
                         services.AddSingleton<IPacketVariableFactory, PacketVariableFactory>();
                     }
