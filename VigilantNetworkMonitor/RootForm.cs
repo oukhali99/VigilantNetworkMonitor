@@ -49,6 +49,12 @@ namespace VigilantNetworkMonitor {
         }
 
         private void applyFilterButton_Click(object sender, EventArgs e) {
+            filterTextBox.Text = filterTextBox.Text.Replace(" <", "<");
+            filterTextBox.Text = filterTextBox.Text.Replace("< ", "<");
+            filterTextBox.Text = filterTextBox.Text.Replace(" >", ">");
+            filterTextBox.Text = filterTextBox.Text.Replace("> ", ">");
+            filterTextBox.Text = filterTextBox.Text.Replace(" =", "=");
+            filterTextBox.Text = filterTextBox.Text.Replace("= ", "=");
             _packetFilterService.SetFilterString(filterTextBox.Text);
         }
     }

@@ -1,8 +1,10 @@
 ﻿
 using PacketDotNet;
-using VigilantNetworkMonitor.PacketFilter;
+using VigilantNetworkMonitor.PacketFilter.Base;
+using VigilantNetworkMonitor.PacketFilter.Factory;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor
+{
     public interface IPacketFilterService {
         bool Filter(MyPacketWrapper myPacketWrapper);
         void SetFilterString(string filterString);

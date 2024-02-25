@@ -1,6 +1,8 @@
 ﻿using System.Text;
+using VigilantNetworkMonitor.PacketFilter.Base;
 
-namespace VigilantNetworkMonitor.PacketFilter {
+namespace VigilantNetworkMonitor.PacketFilter
+{
     internal class PacketFilterOrConcatenator : BasePacketFilterConcatenator {
         internal PacketFilterOrConcatenator(params IPacketFilter[] filters) : base(filters) {
         }
@@ -14,14 +16,14 @@ namespace VigilantNetworkMonitor.PacketFilter {
             return false;
         }
 
-        public override string ToString() {
+        public override string GetFilterString() {
             StringBuilder sb = new StringBuilder();
             sb.Append('(');
             foreach (IPacketFilter filter in _filters) {
                 if (sb.Length > 1) {
                     sb.Append(" or ");
                 }
-                sb.Append(filter.ToString());
+                sb.Append(filter.GetFilterString());
             }
             sb.Append(')');
             return sb.ToString();

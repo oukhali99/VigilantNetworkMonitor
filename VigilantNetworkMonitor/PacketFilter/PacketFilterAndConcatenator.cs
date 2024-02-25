@@ -1,7 +1,9 @@
 ﻿using PacketDotNet;
 using System.Text;
+using VigilantNetworkMonitor.PacketFilter.Base;
 
-namespace VigilantNetworkMonitor.PacketFilter {
+namespace VigilantNetworkMonitor.PacketFilter
+{
     internal class PacketFilterAndConcatenator : BasePacketFilterConcatenator {
 
         internal PacketFilterAndConcatenator(params IPacketFilter[] filters) : base(filters) {
@@ -16,14 +18,14 @@ namespace VigilantNetworkMonitor.PacketFilter {
             return true;
         }
 
-        public override string ToString() {
+        public override string GetFilterString() {
             StringBuilder sb = new StringBuilder();
             sb.Append('(');
             foreach (IPacketFilter filter in _filters) {
                 if (sb.Length > 1) {
                     sb.Append(" and ");
                 }
-                sb.Append(filter.ToString());
+                sb.Append(filter.GetFilterString());
             }
             sb.Append(')');
             return sb.ToString();

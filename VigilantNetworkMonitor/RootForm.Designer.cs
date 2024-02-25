@@ -24,6 +24,11 @@
         /// </summary>
         private void InitializeComponent() {
             packetDataGridView1 = new PacketsDataGridView();
+            sourceIp = new DataGridViewTextBoxColumn();
+            sourcePort = new DataGridViewTextBoxColumn();
+            destinationIP = new DataGridViewTextBoxColumn();
+            destinationPort = new DataGridViewTextBoxColumn();
+            protocol = new DataGridViewTextBoxColumn();
             sniffButton = new Button();
             menuStrip = new MenuStrip();
             file = new ToolStripMenuItem();
@@ -33,11 +38,6 @@
             filterTextBox = new TextBox();
             label1 = new Label();
             applyFilterButton = new Button();
-            sourceIp = new DataGridViewTextBoxColumn();
-            sourcePort = new DataGridViewTextBoxColumn();
-            destinationIP = new DataGridViewTextBoxColumn();
-            destinationPort = new DataGridViewTextBoxColumn();
-            protocol = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
             SuspendLayout();
@@ -55,6 +55,36 @@
             packetDataGridView1.ReadOnly = true;
             packetDataGridView1.Size = new Size(776, 382);
             packetDataGridView1.TabIndex = 0;
+            // 
+            // sourceIp
+            // 
+            sourceIp.HeaderText = "Source IP";
+            sourceIp.Name = "sourceIp";
+            sourceIp.ReadOnly = true;
+            // 
+            // sourcePort
+            // 
+            sourcePort.HeaderText = "Source Port";
+            sourcePort.Name = "sourcePort";
+            sourcePort.ReadOnly = true;
+            // 
+            // destinationIP
+            // 
+            destinationIP.HeaderText = "DestinationIP";
+            destinationIP.Name = "destinationIP";
+            destinationIP.ReadOnly = true;
+            // 
+            // destinationPort
+            // 
+            destinationPort.HeaderText = "Destination Port";
+            destinationPort.Name = "destinationPort";
+            destinationPort.ReadOnly = true;
+            // 
+            // protocol
+            // 
+            protocol.HeaderText = "Protocol";
+            protocol.Name = "protocol";
+            protocol.ReadOnly = true;
             // 
             // sniffButton
             // 
@@ -130,36 +160,6 @@
             applyFilterButton.Text = "Apply";
             applyFilterButton.UseVisualStyleBackColor = true;
             applyFilterButton.Click += applyFilterButton_Click;
-            // 
-            // sourceIp
-            // 
-            sourceIp.HeaderText = "Source IP";
-            sourceIp.Name = "sourceIp";
-            sourceIp.ReadOnly = true;
-            // 
-            // sourcePort
-            // 
-            sourcePort.HeaderText = "Source Port";
-            sourcePort.Name = "sourcePort";
-            sourcePort.ReadOnly = true;
-            // 
-            // destinationIP
-            // 
-            destinationIP.HeaderText = "DestinationIP";
-            destinationIP.Name = "destinationIP";
-            destinationIP.ReadOnly = true;
-            // 
-            // destinationPort
-            // 
-            destinationPort.HeaderText = "Destination Port";
-            destinationPort.Name = "destinationPort";
-            destinationPort.ReadOnly = true;
-            // 
-            // protocol
-            // 
-            protocol.HeaderText = "Protocol";
-            protocol.Name = "protocol";
-            protocol.ReadOnly = true;
             // 
             // RootForm
             // 
