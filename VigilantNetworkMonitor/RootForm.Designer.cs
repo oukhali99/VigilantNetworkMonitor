@@ -24,11 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             packetDataGridView1 = new PacketsDataGridView();
-            sourceIp = new DataGridViewTextBoxColumn();
-            sourcePort = new DataGridViewTextBoxColumn();
-            destinationIP = new DataGridViewTextBoxColumn();
-            destinationPort = new DataGridViewTextBoxColumn();
-            protocol = new DataGridViewTextBoxColumn();
             sniffButton = new Button();
             menuStrip = new MenuStrip();
             file = new ToolStripMenuItem();
@@ -41,6 +36,11 @@
             statusStrip1 = new StatusStrip();
             toolStripErrorLabel = new ToolStripStatusLabel();
             tableLayoutPanel1 = new TableLayoutPanel();
+            sourceIp = new DataGridViewTextBoxColumn();
+            sourcePort = new DataGridViewTextBoxColumn();
+            destinationIP = new DataGridViewTextBoxColumn();
+            destinationPort = new DataGridViewTextBoxColumn();
+            protocol = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -61,36 +61,6 @@
             packetDataGridView1.ReadOnly = true;
             packetDataGridView1.Size = new Size(778, 357);
             packetDataGridView1.TabIndex = 0;
-            // 
-            // sourceIp
-            // 
-            sourceIp.HeaderText = "Source IP";
-            sourceIp.Name = "sourceIp";
-            sourceIp.ReadOnly = true;
-            // 
-            // sourcePort
-            // 
-            sourcePort.HeaderText = "Source Port";
-            sourcePort.Name = "sourcePort";
-            sourcePort.ReadOnly = true;
-            // 
-            // destinationIP
-            // 
-            destinationIP.HeaderText = "DestinationIP";
-            destinationIP.Name = "destinationIP";
-            destinationIP.ReadOnly = true;
-            // 
-            // destinationPort
-            // 
-            destinationPort.HeaderText = "Destination Port";
-            destinationPort.Name = "destinationPort";
-            destinationPort.ReadOnly = true;
-            // 
-            // protocol
-            // 
-            protocol.HeaderText = "Protocol";
-            protocol.Name = "protocol";
-            protocol.ReadOnly = true;
             // 
             // sniffButton
             // 
@@ -206,6 +176,41 @@
             tableLayoutPanel1.Size = new Size(736, 29);
             tableLayoutPanel1.TabIndex = 8;
             // 
+            // sourceIp
+            // 
+            sourceIp.HeaderText = "Source IP";
+            sourceIp.Name = "sourceIp";
+            sourceIp.ReadOnly = true;
+            sourceIp.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // sourcePort
+            // 
+            sourcePort.HeaderText = "Source Port";
+            sourcePort.Name = "sourcePort";
+            sourcePort.ReadOnly = true;
+            sourcePort.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // destinationIP
+            // 
+            destinationIP.HeaderText = "DestinationIP";
+            destinationIP.Name = "destinationIP";
+            destinationIP.ReadOnly = true;
+            destinationIP.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // destinationPort
+            // 
+            destinationPort.HeaderText = "Destination Port";
+            destinationPort.Name = "destinationPort";
+            destinationPort.ReadOnly = true;
+            destinationPort.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // protocol
+            // 
+            protocol.HeaderText = "Protocol";
+            protocol.Name = "protocol";
+            protocol.ReadOnly = true;
+            protocol.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -243,13 +248,13 @@
         private TextBox filterTextBox;
         private Label label1;
         private Button applyFilterButton;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripErrorLabel;
+        private TableLayoutPanel tableLayoutPanel1;
         private DataGridViewTextBoxColumn sourceIp;
         private DataGridViewTextBoxColumn sourcePort;
         private DataGridViewTextBoxColumn destinationIP;
         private DataGridViewTextBoxColumn destinationPort;
         private DataGridViewTextBoxColumn protocol;
-        private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripErrorLabel;
-        private TableLayoutPanel tableLayoutPanel1;
     }
 }
