@@ -3,15 +3,19 @@
 namespace VigilantNetworkMonitor {
     public class MyCaptureDeviceWrapper {
 
-        private ICaptureDevice captureDevice;
+        private ICaptureDevice _captureDevice;
 
-        public string FriendlyName { get; }
-        public string IpAddress { get; }
+        public string? FriendlyName { get; }
+        public string? IpAddress { get; }
 
         public MyCaptureDeviceWrapper(ICaptureDevice captureDevice) {
-            this.captureDevice = captureDevice;
+            _captureDevice = captureDevice;
 
-            string devInfo = captureDevice.ToString();
+            string? devInfo = captureDevice.ToString();
+            if (devInfo == null) {
+                return;
+            }
+
             string[] lines = devInfo.Split('\n');
 
             // Process each line to extract the desired information
@@ -28,31 +32,31 @@ namespace VigilantNetworkMonitor {
         }
 
         public bool IsStarted() {
-            return captureDevice.Started;
+            return _captureDevice.Started;
         }
 
         public void StopCapture() {
-            captureDevice.StopCapture();
+            _captureDevice.StopCapture();
         }
 
         public void Open() {
-            captureDevice.Open();
+            _captureDevice.Open();
         }
 
         public void Close() {
-            captureDevice.Close();
+            _captureDevice.Close();
         }
 
         public void AddPacketArrivalHandler(PacketArrivalEventHandler handler) {
-            captureDevice.OnPacketArrival += handler;
+            _captureDevice.OnPacketArrival += handler;
         }
 
         public void StartCapture() {
-            captureDevice.StartCapture();
+            _captureDevice.StartCapture();
         }
 
         public string GetName() {
-            return captureDevice.Name;
+            return _captureDevice.Name;
         }
 
     }

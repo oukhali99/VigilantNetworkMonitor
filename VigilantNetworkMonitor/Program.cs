@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using VigilantNetworkMonitor.PacketFilter.Factory;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.Comparison.Factory;
+using VigilantNetworkMonitor.PacketFilter.Service;
 
 namespace VigilantNetworkMonitor
 {

@@ -1,7 +1,9 @@
 ﻿using PacketDotNet;
 using SharpPcap;
+using VigilantNetworkMonitor.PacketFilter.Service;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor
+{
     public class PacketsDataGridView : DataGridView {
 
         private INetworkOptions? _networkOptions;
