@@ -32,12 +32,6 @@ namespace VigilantNetworkMonitor {
                     }
                 )
                 .Build();
-            IPacketFilterFactory packetFilterFactory = host.Services.GetRequiredService<IPacketFilterFactory>();
-            IPacketFilter? filter = packetFilterFactory.ParseString("src_port < 1");
-            if (filter != null) {
-                string foo = filter.GetFilterString();
-                Console.WriteLine(foo);
-            }
             ApplicationConfiguration.Initialize();
             Application.Run(host.Services.GetRequiredService<RootForm>());
         }

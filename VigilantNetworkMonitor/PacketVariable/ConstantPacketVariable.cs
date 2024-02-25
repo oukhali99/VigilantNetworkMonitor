@@ -12,6 +12,10 @@ namespace VigilantNetworkMonitor.PacketVariable {
             return _value;
         }
 
+        public override Type GetValueType() {
+            return typeof(MyNumberWrapper);
+        }
+
         public override string GetVariableName() {
             return _value.ToString();
         }

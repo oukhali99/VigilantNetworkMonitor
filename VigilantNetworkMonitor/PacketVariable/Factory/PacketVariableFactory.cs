@@ -13,6 +13,12 @@ namespace VigilantNetworkMonitor.PacketVariable.Factory {
             if (variableString.Equals(SourcePortPacketVariable.VARIABLE_NAME)) {
                 return new SourcePortPacketVariable();
             }
+            if (variableString.Equals(SourceAddressPacketVariable.VARIABLE_NAME)) {
+                return new SourceAddressPacketVariable();
+            }
+            if (variableString.Equals(DestinationAddressPacketVariable.VARIABLE_NAME)) {
+                return new DestinationAddressPacketVariable();
+            }
 
             MyNumberWrapper? myNumberWrapper = MyNumberWrapper.Parse(variableString);
             if (myNumberWrapper != null) {

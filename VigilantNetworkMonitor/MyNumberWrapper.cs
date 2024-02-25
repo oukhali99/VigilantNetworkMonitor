@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using VigilantNetworkMonitor.PacketVariable;
@@ -23,6 +24,14 @@ namespace VigilantNetworkMonitor {
 
         public MyNumberWrapper(ushort value) {
             _value = value;
+        }
+
+        public MyNumberWrapper(IPAddress ipAddress) {
+            _value = 0;
+            byte[] bytes = ipAddress.GetAddressBytes();
+            for (int i = 0; i < bytes.Length; i++) {
+                _value += bytes[i] * Math.Pow(256, bytes.Length - 1 - i);
+            }
         }
 
         public int CompareTo(object? obj) {
@@ -48,6 +57,11 @@ namespace VigilantNetworkMonitor {
             }
             try {
                 return new MyNumberWrapper(double.Parse(stringToParse));
+            }
+            catch (Exception) {
+            }
+            try {
+                return new MyNumberWrapper(IPAddress.Parse(stringToParse));
             }
             catch (Exception) {
             }

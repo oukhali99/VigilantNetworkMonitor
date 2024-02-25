@@ -43,6 +43,10 @@ namespace VigilantNetworkMonitor.PacketFilter.VariableCondition.Factory {
                 return null;
             }
 
+            if (!var1.GetValueType().Equals(var2.GetValueType())) {
+                return null;
+            }
+
             return new PacketVariableConditionFilter(var1, conditionOperator, var2);
         }
 
