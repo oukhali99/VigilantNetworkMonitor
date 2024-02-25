@@ -38,8 +38,11 @@
             filterTextBox = new TextBox();
             label1 = new Label();
             applyFilterButton = new Button();
+            statusStrip1 = new StatusStrip();
+            toolStripErrorLabel = new ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // packetDataGridView1
@@ -161,11 +164,27 @@
             applyFilterButton.UseVisualStyleBackColor = true;
             applyFilterButton.Click += applyFilterButton_Click;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripErrorLabel });
+            statusStrip1.Location = new Point(0, 428);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(800, 22);
+            statusStrip1.TabIndex = 7;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripErrorLabel
+            // 
+            toolStripErrorLabel.ForeColor = Color.Red;
+            toolStripErrorLabel.Name = "toolStripErrorLabel";
+            toolStripErrorLabel.Size = new Size(0, 17);
+            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(statusStrip1);
             Controls.Add(applyFilterButton);
             Controls.Add(label1);
             Controls.Add(filterTextBox);
@@ -179,6 +198,8 @@
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).EndInit();
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -200,5 +221,7 @@
         private DataGridViewTextBoxColumn destinationIP;
         private DataGridViewTextBoxColumn destinationPort;
         private DataGridViewTextBoxColumn protocol;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripErrorLabel;
     }
 }

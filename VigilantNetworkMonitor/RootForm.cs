@@ -54,8 +54,10 @@ namespace VigilantNetworkMonitor {
             _packetFilterService.SetFilterString(filterTextBox.Text);
             IPacketFilter? filter = _packetFilterService.GetFilter();
             if (filter == null) {
+                toolStripErrorLabel.Text = "Invalid Filter";
                 return;
             }
+            toolStripErrorLabel.Text = "";
             filterTextBox.Text = filter.GetFilterString();
         }
     }
