@@ -1,9 +1,7 @@
-﻿using PacketDotNet;
-using System.Text;
+﻿using System.Text;
 using VigilantNetworkMonitor.PacketFilter.Base;
 
-namespace VigilantNetworkMonitor.PacketFilter
-{
+namespace VigilantNetworkMonitor.PacketFilter {
     internal class PacketFilterAndConcatenator : BasePacketFilterConcatenator {
 
         internal PacketFilterAndConcatenator(params IPacketFilter[] filters) : base(filters) {

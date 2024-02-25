@@ -1,10 +1,8 @@
-﻿namespace VigilantNetworkMonitor.Comparison.Base
-{
+﻿namespace VigilantNetworkMonitor.Comparison.Base {
     internal abstract class BaseComparison<E> : IComparison<E> where E : IComparable {
         protected E _innerValue { get; }
 
-        protected BaseComparison(E innerValue)
-        {
+        protected BaseComparison(E innerValue) {
             _innerValue = innerValue;
         }
 

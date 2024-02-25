@@ -1,6 +1,4 @@
-﻿using SharpPcap;
-
-namespace VigilantNetworkMonitor {
+﻿namespace VigilantNetworkMonitor {
     public class NetworkInterfacesDataGridView : DataGridView {
 
         private INetworkOptions? _networkOptions;

@@ -3,8 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Service;
 
-namespace VigilantNetworkMonitor
-{
+namespace VigilantNetworkMonitor {
     public partial class RootForm : Form {
 
         private readonly INetworkOptions _networkOptions;

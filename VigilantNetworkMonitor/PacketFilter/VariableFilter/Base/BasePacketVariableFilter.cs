@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VigilantNetworkMonitor.Comparison.Base;
-using VigilantNetworkMonitor.PacketFilter.Base;
+﻿using VigilantNetworkMonitor.Comparison.Base;
 
 namespace VigilantNetworkMonitor.PacketFilter.VariableFilter.Base {
     internal abstract class BasePacketVariableFilter<E> : IPacketVariableFilter<E> where E : IComparable {
