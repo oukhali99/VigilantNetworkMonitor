@@ -2,6 +2,7 @@
 using VigilantNetworkMonitor.Condition.Service;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.VariableComparison;
+using VigilantNetworkMonitor.PacketFilter.VariableCondition.Factory;
 using VigilantNetworkMonitor.PacketVariable.Base;
 using VigilantNetworkMonitor.PacketVariable.Factory;
 
@@ -11,12 +12,10 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory {
     }
 
     public class PacketFilterFactory : IPacketFilterFactory {
-        private readonly IConditionFactory _conditionFactory;
-        private readonly IPacketVariableFactory _packetVariableFactory;
+        private readonly IPacketVariableConditionFilterFactory _packetVariableFilterFactory;
 
-        public PacketFilterFactory(IConditionFactory conditionFactory, IPacketVariableFactory packetVariableFactory) {
-            _conditionFactory = conditionFactory;
-            _packetVariableFactory = packetVariableFactory;
+        public PacketFilterFactory(IPacketVariableConditionFilterFactory packetVariableFilterFactory) {
+            _packetVariableFilterFactory = packetVariableFilterFactory;
         }
 
         private string formatString(string filterString) {
@@ -143,32 +142,12 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory {
                 return new TcpPacketFilter();
             }
 
-            IPacketFilter? comparisonFilter = parseComparison(spaceLessString);
+            IPacketFilter? comparisonFilter = _packetVariableFilterFactory.parseComparison(spaceLessString);
             if (comparisonFilter != null) {
                 return comparisonFilter;
             }
 
             return null;
-        }
-
-        private IPacketFilter? parseComparison(string comparisonString) {
-            ICondition? conditionOperator = _conditionFactory.Parse(comparisonString);
-            if (conditionOperator == null) {
-                return null;
-            }
-
-            string[] stringVariables = comparisonString.Split(conditionOperator.GetConditionString());
-            if (stringVariables.Length != 2) {
-                return null;
-            }
-
-            IPacketVariable? var1 = _packetVariableFactory.Parse(stringVariables[0]);
-            IPacketVariable? var2 = _packetVariableFactory.Parse(stringVariables[1]);
-            if (var1 == null || var2 == null) {
-                return null;
-            }
-
-            return new PacketVariableConditionFilter(var1, conditionOperator, var2);
         }
     }
 }

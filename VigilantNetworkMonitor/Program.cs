@@ -5,6 +5,7 @@ using VigilantNetworkMonitor.Condition.Service;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Factory;
 using VigilantNetworkMonitor.PacketFilter.Service;
+using VigilantNetworkMonitor.PacketFilter.VariableCondition.Factory;
 using VigilantNetworkMonitor.PacketVariable.Factory;
 
 namespace VigilantNetworkMonitor {
@@ -27,6 +28,7 @@ namespace VigilantNetworkMonitor {
                         services.AddSingleton<IPacketFilterFactory, PacketFilterFactory>();
                         services.AddSingleton<IConditionFactory, ConditionFactory>();
                         services.AddSingleton<IPacketVariableFactory, PacketVariableFactory>();
+                        services.AddSingleton<IPacketVariableConditionFilterFactory, PacketVariableConditionFilterFactory>();
                     }
                 )
                 .Build();
