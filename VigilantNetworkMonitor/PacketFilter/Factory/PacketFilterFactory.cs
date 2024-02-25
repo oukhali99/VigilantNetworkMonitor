@@ -1,7 +1,11 @@
-﻿using VigilantNetworkMonitor.Comparison.Base;
+﻿using VigilantNetworkMonitor.Comparator.Base;
 using VigilantNetworkMonitor.Comparison.Factory;
+using VigilantNetworkMonitor.Condition.Service;
 using VigilantNetworkMonitor.PacketFilter.Base;
-using VigilantNetworkMonitor.PacketFilter.VariableFilter;
+using VigilantNetworkMonitor.PacketFilter.VariableComparison;
+using VigilantNetworkMonitor.PacketFilter.VariableComparison.Base;
+using VigilantNetworkMonitor.PacketVariable.Base;
+using VigilantNetworkMonitor.PacketVariable.Factory;
 
 namespace VigilantNetworkMonitor.PacketFilter.Factory {
     public interface IPacketFilterFactory {
@@ -9,13 +13,27 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory {
     }
 
     public class PacketFilterFactory : IPacketFilterFactory {
-        private readonly IComparisonFactory _comparisonFactory;
+        private readonly IConditionFactory _conditionFactory;
+        private readonly IPacketVariableFactory _packetVariableFactory;
 
-        public PacketFilterFactory(IComparisonFactory comparisonFactory) {
-            _comparisonFactory = comparisonFactory;
+        public PacketFilterFactory(IConditionFactory conditionFactory, IPacketVariableFactory packetVariableFactory) {
+            _conditionFactory = conditionFactory;
+            _packetVariableFactory = packetVariableFactory;
+        }
+
+        private string formatString(string filterString) {
+            filterString = filterString.Replace(" <", "<");
+            filterString = filterString.Replace("< ", "<");
+            filterString = filterString.Replace(" >", ">");
+            filterString = filterString.Replace("> ", ">");
+            filterString = filterString.Replace(" =", "=");
+            filterString = filterString.Replace("= ", "=");
+            return filterString;
         }
 
         public IPacketFilter? ParseString(string filterString) {
+            filterString = formatString(filterString);
+
             string[] split = filterString.Split(" ", StringSplitOptions.None);
 
             // Only 1 split, this means there are no spaces
@@ -126,30 +144,33 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory {
             if (spaceLessString.Equals("tcp")) {
                 return new TcpPacketFilter();
             }
-            if (
-                spaceLessString.StartsWith(PacketSourcePortVariableFilter.VARIABLE_NAME) ||
-                spaceLessString.EndsWith(PacketSourcePortVariableFilter.VARIABLE_NAME)
-            ) {
-                string comparisonString = spaceLessString.Replace("src_port", "");
-                IComparison<ushort>? comparison = _comparisonFactory.Parse<ushort>(comparisonString);
-                if (comparison == null) {
-                    return null;
-                }
-                return new PacketSourcePortVariableFilter(comparison);
-            }
-            if (
-                spaceLessString.StartsWith(PacketDestinationPortVariableFilter.VARIABLE_NAME) ||
-                spaceLessString.EndsWith(PacketDestinationPortVariableFilter.VARIABLE_NAME)
-            ) {
-                string comparisonString = spaceLessString.Replace("dst_port", "");
-                IComparison<ushort>? comparison = _comparisonFactory.Parse<ushort>(comparisonString);
-                if (comparison == null) {
-                    return null;
-                }
-                return new PacketDestinationPortVariableFilter(comparison);
+
+            IPacketFilter? comparisonFilter = parseComparison(spaceLessString);
+            if (comparisonFilter != null) {
+                return comparisonFilter;
             }
 
             return null;
+        }
+
+        private IPacketFilter? parseComparison(string comparisonString) {
+            ICondition? conditionOperator = _conditionFactory.Parse(comparisonString);
+            if (conditionOperator == null) {
+                return null;
+            }
+
+            string[] stringVariables = comparisonString.Split(conditionOperator.GetConditionString());
+            if (stringVariables.Length != 2) {
+                return null;
+            }
+
+            IPacketVariable? var1 = _packetVariableFactory.Parse(stringVariables[0]);
+            IPacketVariable? var2 =  _packetVariableFactory.Parse(stringVariables[1]);
+            if (var1 == null || var2 == null) {
+                return null;
+            }
+
+            return new PacketVariableComparisonFilter(var1, conditionOperator, var2);
         }
     }
 }

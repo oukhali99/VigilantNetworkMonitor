@@ -14,7 +14,7 @@ namespace VigilantNetworkMonitor.PacketFilter.VariableFilter {
             if (sourcePort == null) {
                 return false;
             }
-            return _comparison.GetResult(sourcePort.Value);
+            return Comparison.GetResult(sourcePort.Value);
         }
 
         public override string GetVariableName() {

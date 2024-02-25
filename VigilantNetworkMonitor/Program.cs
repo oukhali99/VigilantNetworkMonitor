@@ -2,8 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VigilantNetworkMonitor.Comparison.Factory;
+using VigilantNetworkMonitor.Condition.Service;
+using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Factory;
 using VigilantNetworkMonitor.PacketFilter.Service;
+using VigilantNetworkMonitor.PacketVariable.Factory;
 
 namespace VigilantNetworkMonitor {
     internal static class Program {
@@ -24,9 +27,17 @@ namespace VigilantNetworkMonitor {
                         services.AddSingleton<IPacketFilterService, PacketFilterService>();
                         services.AddSingleton<IPacketFilterFactory, PacketFilterFactory>();
                         services.AddSingleton<IComparisonFactory, ComparisonFactory>();
+                        services.AddSingleton<IConditionFactory, ConditionFactory>();
+                        services.AddSingleton<IPacketVariableFactory, PacketVariableFactory>();
                     }
                 )
                 .Build();
+            IPacketFilterFactory packetFilterFactory = host.Services.GetRequiredService<IPacketFilterFactory>();
+            IPacketFilter? filter = packetFilterFactory.ParseString("src_port < 1");
+            if (filter != null) {
+                string foo = filter.GetFilterString();
+                Console.WriteLine(foo);
+            }
             ApplicationConfiguration.Initialize();
             Application.Run(host.Services.GetRequiredService<RootForm>());
         }

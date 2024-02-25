@@ -26,14 +26,6 @@ namespace VigilantNetworkMonitor.PacketFilter.Service {
         }
 
         public void SetFilterString(string filterString) {
-
-            filterString = filterString.Replace(" <", "<");
-            filterString = filterString.Replace("< ", "<");
-            filterString = filterString.Replace(" >", ">");
-            filterString = filterString.Replace("> ", ">");
-            filterString = filterString.Replace(" =", "=");
-            filterString = filterString.Replace("= ", "=");
-
             _filter = _packetFilterFactory.ParseString(filterString);
             _changedFilterString?.Invoke(this, EventArgs.Empty);
         }
