@@ -20,68 +20,90 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory
         public IPacketFilter? ParseString(string filterString)
         {
             string[] split = filterString.Split(" ", StringSplitOptions.None);
+
+            // Only 1 split, this means there are no spaces
             if (split.Length == 1)
             {
                 return ParseSpacelessString(split[0]);
             }
 
-            ICollection<string> blocks = new LinkedList<string>();
+            ICollection<string> elements = new LinkedList<string>();
 
-            // Split into blocks, respecting parenthesis
+            /*
+             * Get 3 elements into the list
+             * The first element
+             * The second element (operator)
+             * The rest of the filter
+             */
             int parenthesisBalance = 0;
-            string block = "";
+            string currentElement = "";
             for (int i = 0; i < split.Length; i++)
             {
-                string s = split[i];
+                string splitItem = split[i];
 
-                if (block.Length > 0)
+                if (currentElement.Length > 0)
                 {
-                    block += " ";
+                    currentElement += " ";
                 }
-                block += s;
+                currentElement += splitItem;
 
-                parenthesisBalance += s.Count(c => c == '(');
-                parenthesisBalance -= s.Count(c => c == ')');
+                parenthesisBalance += splitItem.Count(c => c == '(');
+                parenthesisBalance -= splitItem.Count(c => c == ')');
 
-                if (parenthesisBalance == 0 && blocks.Count < 2)
+                if (
+                    // If we are in the middle of parenthesis, keep accumulating
+                    parenthesisBalance == 0 &&
+                    // If we already have the 2 first elements, keep accumulating
+                    elements.Count < 2
+                    )
                 {
-                    blocks.Add(block);
-                    block = "";
+                    elements.Add(currentElement);
+                    currentElement = "";
                 }
             }
-            if (block.Length > 0)
+
+            // Whatever is accumulated is the 3rd element, the rest of the filter
+            if (currentElement.Length > 0)
             {
-                blocks.Add(block);
+                elements.Add(currentElement);
             }
 
-            if (blocks.Count == 1)
+            // Only 1 element, this means it must be a parenthesis
+            if (elements.Count == 1)
             {
-                string trimmedBlock = blocks.ElementAt(0);
+                string trimmedBlock = elements.ElementAt(0);
 
+                // Is there enough characters for 2 parenthesis?
                 if (trimmedBlock.Length < 2)
                 {
                     return null;
                 }
+                // Are there parenthesis?
                 if (trimmedBlock[0] != '(')
                 {
                     return null;
                 }
+                // Are there parenthesis?
                 if (trimmedBlock[trimmedBlock.Length - 1] != ')')
                 {
                     return null;
                 }
 
+                // Remove the parenthesis and parse
                 trimmedBlock = trimmedBlock.Substring(1, trimmedBlock.Length - 2);
                 return ParseString(trimmedBlock);
             }
-            if (blocks.Count == 2)
+
+            // Are there only 2 elements? Not valid
+            if (elements.Count == 2)
             {
                 return null;
             }
 
-            string firstBlock = blocks.ElementAt(0);
-            string firstOperator = blocks.ElementAt(1);
-            string restFilter = blocks.ElementAt(2);
+            // Get the 3 elements
+            string firstBlock = elements.ElementAt(0);
+            string firstOperator = elements.ElementAt(1);
+            string restFilter = elements.ElementAt(2);
 
             IPacketFilter? filter1 = ParseString(firstBlock);
             IPacketFilter? filter2 = ParseString(restFilter);
@@ -90,6 +112,11 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory
                 return null;
             }
 
+            /*
+             * Parse or first. Since and should get evaluated first
+             * It makes sense when you think about it
+             * The filter resolves the inner filters first
+             */
             if (firstOperator.Equals("or"))
             {
                 return new PacketFilterOrConcatenator(
