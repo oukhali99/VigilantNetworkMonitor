@@ -5,6 +5,10 @@ namespace VigilantNetworkMonitor.Comparison {
         public BiggerThanComparison(E innerValue) : base(innerValue) {
         }
 
+        public override string GetComparisonString() {
+            return ">" + _innerValue;
+        }
+
         public override bool GetResult(E value) {
             return value.CompareTo(_innerValue) > 0;
         }

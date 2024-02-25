@@ -8,5 +8,9 @@ namespace VigilantNetworkMonitor.Comparison {
         public override bool GetResult(E value) {
             return value.CompareTo(_innerValue) < 0;
         }
+
+        public override string GetComparisonString() {
+            return "<" + _innerValue;
+        }
     }
 }

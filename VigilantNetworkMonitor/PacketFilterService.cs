@@ -9,6 +9,7 @@ namespace VigilantNetworkMonitor
         bool Filter(MyPacketWrapper myPacketWrapper);
         void SetFilterString(string filterString);
         void AddChangedFilterStringEventHandler(EventHandler handler);
+        public IPacketFilter? GetFilter();
     }
 
     public class PacketFilterService : IPacketFilterService {
@@ -28,12 +29,24 @@ namespace VigilantNetworkMonitor
         }
 
         public void SetFilterString(string filterString) {
+
+            filterString = filterString.Replace(" <", "<");
+            filterString = filterString.Replace("< ", "<");
+            filterString = filterString.Replace(" >", ">");
+            filterString = filterString.Replace("> ", ">");
+            filterString = filterString.Replace(" =", "=");
+            filterString = filterString.Replace("= ", "=");
+
             _filter = _packetFilterFactory.ParseString(filterString);
             _changedFilterString?.Invoke(this, EventArgs.Empty);
         }
 
         public void AddChangedFilterStringEventHandler(EventHandler handler) {
             _changedFilterString += handler;
+        }
+
+        public IPacketFilter? GetFilter() {
+            return _filter;
         }
 
     }

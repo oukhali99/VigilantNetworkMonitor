@@ -118,7 +118,10 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory
             {
                 return new TcpPacketFilter();
             }
-            if (spaceLessString.StartsWith("src_port") || spaceLessString.EndsWith("src_port")) {
+            if (
+                spaceLessString.StartsWith(PacketSourcePortVariableFilter.VARIABLE_NAME) ||
+                spaceLessString.EndsWith(PacketSourcePortVariableFilter.VARIABLE_NAME)
+            ) {
                 string comparisonString = spaceLessString.Replace("src_port", "");
                 IComparison<ushort>? comparison = _comparisonFactory.Parse<ushort>(comparisonString);
                 if (comparison == null) {
@@ -126,7 +129,10 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory
                 }
                 return new PacketSourcePortVariableFilter(comparison);
             }
-            if (spaceLessString.StartsWith("dst_port") || spaceLessString.EndsWith("dst_port")) {
+            if (
+                spaceLessString.StartsWith(PacketDestinationPortVariableFilter.VARIABLE_NAME) ||
+                spaceLessString.EndsWith(PacketDestinationPortVariableFilter.VARIABLE_NAME)
+            ) {
                 string comparisonString = spaceLessString.Replace("dst_port", "");
                 IComparison<ushort>? comparison = _comparisonFactory.Parse<ushort>(comparisonString);
                 if (comparison == null) {

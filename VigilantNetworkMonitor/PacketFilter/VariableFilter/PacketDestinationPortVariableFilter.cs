@@ -8,6 +8,9 @@ using VigilantNetworkMonitor.PacketFilter.VariableFilter.Base;
 
 namespace VigilantNetworkMonitor.PacketFilter.VariableFilter {
     internal class PacketDestinationPortVariableFilter : BasePacketVariableFilter<ushort> {
+
+        public new const string VARIABLE_NAME = "dst_port";
+
         public PacketDestinationPortVariableFilter(IComparison<ushort> comparison) : base(comparison) {
         }
 
@@ -19,8 +22,8 @@ namespace VigilantNetworkMonitor.PacketFilter.VariableFilter {
             return _comparison.GetResult(destinationPort.Value);
         }
 
-        public override string GetFilterString() {
-            return "dst_port comp " + _comparison.ToString();
+        public override string GetVariableName() {
+            return VARIABLE_NAME;
         }
     }
 }

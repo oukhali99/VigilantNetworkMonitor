@@ -1,5 +1,6 @@
 
 using Microsoft.Extensions.DependencyInjection;
+using VigilantNetworkMonitor.PacketFilter.Base;
 
 namespace VigilantNetworkMonitor {
     public partial class RootForm : Form {
@@ -49,13 +50,12 @@ namespace VigilantNetworkMonitor {
         }
 
         private void applyFilterButton_Click(object sender, EventArgs e) {
-            filterTextBox.Text = filterTextBox.Text.Replace(" <", "<");
-            filterTextBox.Text = filterTextBox.Text.Replace("< ", "<");
-            filterTextBox.Text = filterTextBox.Text.Replace(" >", ">");
-            filterTextBox.Text = filterTextBox.Text.Replace("> ", ">");
-            filterTextBox.Text = filterTextBox.Text.Replace(" =", "=");
-            filterTextBox.Text = filterTextBox.Text.Replace("= ", "=");
             _packetFilterService.SetFilterString(filterTextBox.Text);
+            IPacketFilter? filter = _packetFilterService.GetFilter();
+            if (filter == null) {
+                return;
+            }
+            filterTextBox.Text = filter.GetFilterString();
         }
     }
 }

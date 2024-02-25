@@ -9,5 +9,6 @@
         }
 
         public abstract bool GetResult(E value);
+        public abstract string GetComparisonString();
     }
 }
