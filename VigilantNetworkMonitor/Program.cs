@@ -28,11 +28,6 @@ namespace VigilantNetworkMonitor
                     }
                 )
                 .Build();
-            IPacketFilter? filter = host.Services.GetRequiredService<IPacketFilterFactory>().ParseString("udp and src_port<100");
-            if (filter != null) {
-                string stred = filter.GetFilterString();
-                Console.Write(stred);
-            }
             ApplicationConfiguration.Initialize();
             Application.Run(host.Services.GetRequiredService<RootForm>());
         }
