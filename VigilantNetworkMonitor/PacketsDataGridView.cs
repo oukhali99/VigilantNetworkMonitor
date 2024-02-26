@@ -113,7 +113,8 @@ namespace VigilantNetworkMonitor {
                 myPacketWrapper.GetDestinationAddress(),
                 myPacketWrapper.GetDestinationPort(),
                 myPacketWrapper.GetProtocol(),
-                myPacketWrapper.GetPayloadHexadecimal()
+                myPacketWrapper.GetPayloadHexadecimal(),
+                myPacketWrapper.GetPayloadBase64()
             );
 
             if (_generalOptions != null && _generalOptions.IsAutoScrollEnabled()) {
