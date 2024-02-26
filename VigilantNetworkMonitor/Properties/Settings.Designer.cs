@@ -34,5 +34,17 @@ namespace VigilantNetworkMonitor.Properties {
                 this["SelectedCaptureDeviceName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoScrollEnabled {
+            get {
+                return ((bool)(this["AutoScrollEnabled"]));
+            }
+            set {
+                this["AutoScrollEnabled"] = value;
+            }
+        }
     }
 }

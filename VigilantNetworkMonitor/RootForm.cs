@@ -10,20 +10,24 @@ namespace VigilantNetworkMonitor {
         private readonly INetworkOptions _networkOptions;
         private readonly IServiceProvider _serviceProvider;
         private readonly IPacketFilterService _packetFilterService;
+        private readonly IGeneralOptions _generalOptions;
 
         public RootForm(
             INetworkOptions networkOptions,
             IServiceProvider serviceProvider,
-            IPacketFilterService packetFilterService
+            IPacketFilterService packetFilterService,
+            IGeneralOptions generalOptions
         ) {
             _networkOptions = networkOptions;
             _serviceProvider = serviceProvider;
             _packetFilterService = packetFilterService;
+            _generalOptions = generalOptions;
             InitializeComponent();
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
-            packetDataGridView1.Load(_networkOptions, _packetFilterService);
+            packetDataGridView1.Load(_networkOptions, _packetFilterService, _generalOptions);
+            autoScrollCheckBox.Checked = _generalOptions.IsAutoScrollEnabled();
         }
 
         private void sniffButton_Click(object sender, EventArgs e) {
@@ -60,6 +64,14 @@ namespace VigilantNetworkMonitor {
             }
             toolStripErrorLabel.Text = "";
             //filterTextBox.Text = filter.GetFilterString();
+        }
+
+        private void autoScrollCheckBox_CheckedChanged(object sender, EventArgs e) {
+            _generalOptions.SetAutoScrollEnabled(autoScrollCheckBox.Checked);
+
+            if (autoScrollCheckBox.Checked) {
+                packetDataGridView1.ScrollToBottom();
+            }
         }
     }
 }

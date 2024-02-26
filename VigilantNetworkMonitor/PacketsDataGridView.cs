@@ -9,15 +9,20 @@ namespace VigilantNetworkMonitor {
         private INetworkOptions? _networkOptions;
         private IPacketFilterService? _packetFilterService;
         private ICollection<MyPacketWrapper> packets;
+        private IGeneralOptions? _generalOptions;
 
         public PacketsDataGridView() {
             packets = new LinkedList<MyPacketWrapper>();
         }
 
-        public void Load(INetworkOptions networkOptions, IPacketFilterService packetFilterService) {
+        public void Load(
+            INetworkOptions networkOptions,
+            IPacketFilterService packetFilterService,
+            IGeneralOptions generalOptions
+        ) {
             _packetFilterService = packetFilterService;
             _networkOptions = networkOptions;
-
+            _generalOptions = generalOptions;
             _packetFilterService.AddChangedFilterStringEventHandler(onFilterChanged);
         }
 
@@ -94,7 +99,10 @@ namespace VigilantNetworkMonitor {
                 myPacketWrapper.GetDestinationPort(),
                 myPacketWrapper.GetProtocol()
             );
-            FirstDisplayedScrollingRowIndex = Rows.Count - 1;
+
+            if (_generalOptions != null && _generalOptions.IsAutoScrollEnabled()) {
+                ScrollToBottom();
+            }
         }
 
         private void onFilterChanged(object? sender, EventArgs e) {
@@ -113,6 +121,18 @@ namespace VigilantNetworkMonitor {
 
                 AddPacket(myPacketWrapper);
             }
+        }
+
+        internal void ScrollToBottom() {
+            if (Rows.Count == 0) {
+                return;
+            }
+            if (InvokeRequired) {
+                Invoke(new Action(() => ScrollToBottom()));
+                return;
+            }
+
+            FirstDisplayedScrollingRowIndex = Rows.Count - 1;
         }
 
     }
