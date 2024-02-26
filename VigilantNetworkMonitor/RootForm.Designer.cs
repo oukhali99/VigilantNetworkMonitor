@@ -24,6 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             packetDataGridView1 = new PacketsDataGridView();
+            sourceIp = new DataGridViewTextBoxColumn();
+            sourcePort = new DataGridViewTextBoxColumn();
+            destinationIP = new DataGridViewTextBoxColumn();
+            destinationPort = new DataGridViewTextBoxColumn();
+            protocol = new DataGridViewTextBoxColumn();
+            payloadHex = new DataGridViewTextBoxColumn();
+            payloadBase64 = new DataGridViewTextBoxColumn();
             sniffButton = new Button();
             menuStrip = new MenuStrip();
             file = new ToolStripMenuItem();
@@ -38,13 +45,6 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             autoScrollCheckBox = new CheckBox();
             tableLayoutPanel2 = new TableLayoutPanel();
-            sourceIp = new DataGridViewTextBoxColumn();
-            sourcePort = new DataGridViewTextBoxColumn();
-            destinationIP = new DataGridViewTextBoxColumn();
-            destinationPort = new DataGridViewTextBoxColumn();
-            protocol = new DataGridViewTextBoxColumn();
-            payloadHex = new DataGridViewTextBoxColumn();
-            payloadBase64 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -56,6 +56,7 @@
             // 
             packetDataGridView1.AllowUserToAddRows = false;
             packetDataGridView1.AllowUserToDeleteRows = false;
+            packetDataGridView1.AllowUserToOrderColumns = true;
             packetDataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             packetDataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             packetDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -66,6 +67,55 @@
             packetDataGridView1.ReadOnly = true;
             packetDataGridView1.Size = new Size(778, 310);
             packetDataGridView1.TabIndex = 0;
+            // 
+            // sourceIp
+            // 
+            sourceIp.HeaderText = "Source IP";
+            sourceIp.Name = "sourceIp";
+            sourceIp.ReadOnly = true;
+            sourceIp.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // sourcePort
+            // 
+            sourcePort.HeaderText = "Source Port";
+            sourcePort.Name = "sourcePort";
+            sourcePort.ReadOnly = true;
+            sourcePort.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // destinationIP
+            // 
+            destinationIP.HeaderText = "DestinationIP";
+            destinationIP.Name = "destinationIP";
+            destinationIP.ReadOnly = true;
+            destinationIP.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // destinationPort
+            // 
+            destinationPort.HeaderText = "Destination Port";
+            destinationPort.Name = "destinationPort";
+            destinationPort.ReadOnly = true;
+            destinationPort.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // protocol
+            // 
+            protocol.HeaderText = "Protocol";
+            protocol.Name = "protocol";
+            protocol.ReadOnly = true;
+            protocol.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // payloadHex
+            // 
+            payloadHex.HeaderText = "Payload(Hex)";
+            payloadHex.Name = "payloadHex";
+            payloadHex.ReadOnly = true;
+            payloadHex.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // payloadBase64
+            // 
+            payloadBase64.HeaderText = "Payload(Base64)";
+            payloadBase64.Name = "payloadBase64";
+            payloadBase64.ReadOnly = true;
+            payloadBase64.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // sniffButton
             // 
@@ -208,55 +258,6 @@
             tableLayoutPanel2.Size = new Size(778, 28);
             tableLayoutPanel2.TabIndex = 9;
             // 
-            // sourceIp
-            // 
-            sourceIp.HeaderText = "Source IP";
-            sourceIp.Name = "sourceIp";
-            sourceIp.ReadOnly = true;
-            sourceIp.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // sourcePort
-            // 
-            sourcePort.HeaderText = "Source Port";
-            sourcePort.Name = "sourcePort";
-            sourcePort.ReadOnly = true;
-            sourcePort.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // destinationIP
-            // 
-            destinationIP.HeaderText = "DestinationIP";
-            destinationIP.Name = "destinationIP";
-            destinationIP.ReadOnly = true;
-            destinationIP.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // destinationPort
-            // 
-            destinationPort.HeaderText = "Destination Port";
-            destinationPort.Name = "destinationPort";
-            destinationPort.ReadOnly = true;
-            destinationPort.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // protocol
-            // 
-            protocol.HeaderText = "Protocol";
-            protocol.Name = "protocol";
-            protocol.ReadOnly = true;
-            protocol.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // payloadHex
-            // 
-            payloadHex.HeaderText = "Payload(Hex)";
-            payloadHex.Name = "payloadHex";
-            payloadHex.ReadOnly = true;
-            payloadHex.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // payloadBase64
-            // 
-            payloadBase64.HeaderText = "Payload(Base64)";
-            payloadBase64.Name = "payloadBase64";
-            payloadBase64.ReadOnly = true;
-            payloadBase64.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -271,6 +272,7 @@
             MainMenuStrip = menuStrip;
             Name = "RootForm";
             Text = "Vigilant";
+            FormClosing += RootForm_FormClosing;
             Load += RootForm_Load;
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).EndInit();
             menuStrip.ResumeLayout(false);

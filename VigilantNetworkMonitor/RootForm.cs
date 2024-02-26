@@ -29,6 +29,22 @@ namespace VigilantNetworkMonitor {
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
+            Point savedWindowLocation = Properties.Settings.Default.WindowLocation;
+            Size savedWindowSize = Properties.Settings.Default.WindowSize;
+
+            if (
+                savedWindowLocation.X > Location.X &&
+                savedWindowLocation.Y > Location.Y
+            ) {
+                Location = savedWindowLocation;
+            }
+            if (
+                savedWindowSize.Width > Size.Width &&
+                savedWindowSize.Height > Size.Height
+            ) {
+                Size = savedWindowSize;
+            }
+
             packetDataGridView1.Load(_networkOptions, _packetFilterService, _generalOptions, _columnOptions);
             autoScrollCheckBox.Checked = _generalOptions.IsAutoScrollEnabled();
         }
@@ -75,6 +91,12 @@ namespace VigilantNetworkMonitor {
             if (autoScrollCheckBox.Checked) {
                 packetDataGridView1.ScrollToBottom();
             }
+        }
+
+        private void RootForm_FormClosing(object sender, FormClosingEventArgs e) {
+            Properties.Settings.Default.WindowLocation = Location;
+            Properties.Settings.Default.WindowSize = Size;
+            Properties.Settings.Default.Save();
         }
     }
 }
