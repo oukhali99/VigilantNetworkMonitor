@@ -1,5 +1,7 @@
 ﻿using PacketDotNet;
 using System.Net;
+using System.Text;
+using System.Text.Unicode;
 
 namespace VigilantNetworkMonitor.Model {
     public class MyPacketWrapper {
@@ -71,6 +73,38 @@ namespace VigilantNetworkMonitor.Model {
 
 
             return "Unknown";
+        }
+
+        internal byte[]? GetPayload() {
+            TransportPacket? transportPacket = GetTransportPacket();
+            if (transportPacket == null) {
+                return null;
+            } 
+            return transportPacket.PayloadData;
+        }
+
+        internal string? GetPayloadBase64() {
+            byte[]? payload = GetPayload();
+            if (payload == null) {
+                return null;
+            }
+            return Convert.ToBase64String(payload);
+        }
+
+        internal string? GetPayloadHexadecimal() {
+            byte[]? payload = GetPayload();
+            if (payload == null) {
+                return null;
+            }
+            return Convert.ToHexString(payload);
+        }
+
+        internal string? GetPayloadASCII() {
+            byte[]? payload = GetPayload();
+            if (payload == null) {
+                return null;
+            }
+            return Encoding.ASCII.GetString(payload);
         }
     }
 }

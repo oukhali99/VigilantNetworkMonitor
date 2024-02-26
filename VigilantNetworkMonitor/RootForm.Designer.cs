@@ -24,11 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             packetDataGridView1 = new PacketsDataGridView();
-            sourceIp = new DataGridViewTextBoxColumn();
-            sourcePort = new DataGridViewTextBoxColumn();
-            destinationIP = new DataGridViewTextBoxColumn();
-            destinationPort = new DataGridViewTextBoxColumn();
-            protocol = new DataGridViewTextBoxColumn();
             sniffButton = new Button();
             menuStrip = new MenuStrip();
             file = new ToolStripMenuItem();
@@ -43,6 +38,12 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             autoScrollCheckBox = new CheckBox();
             tableLayoutPanel2 = new TableLayoutPanel();
+            sourceIp = new DataGridViewTextBoxColumn();
+            sourcePort = new DataGridViewTextBoxColumn();
+            destinationIP = new DataGridViewTextBoxColumn();
+            destinationPort = new DataGridViewTextBoxColumn();
+            protocol = new DataGridViewTextBoxColumn();
+            payload = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
             menuStrip.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -57,48 +58,13 @@
             packetDataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             packetDataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             packetDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            packetDataGridView1.Columns.AddRange(new DataGridViewColumn[] { sourceIp, sourcePort, destinationIP, destinationPort, protocol });
+            packetDataGridView1.Columns.AddRange(new DataGridViewColumn[] { sourceIp, sourcePort, destinationIP, destinationPort, protocol, payload });
             packetDataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
             packetDataGridView1.Location = new Point(12, 62);
             packetDataGridView1.Name = "packetDataGridView1";
             packetDataGridView1.ReadOnly = true;
             packetDataGridView1.Size = new Size(778, 310);
             packetDataGridView1.TabIndex = 0;
-            // 
-            // sourceIp
-            // 
-            sourceIp.HeaderText = "Source IP";
-            sourceIp.Name = "sourceIp";
-            sourceIp.ReadOnly = true;
-            sourceIp.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // sourcePort
-            // 
-            sourcePort.HeaderText = "Source Port";
-            sourcePort.Name = "sourcePort";
-            sourcePort.ReadOnly = true;
-            sourcePort.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // destinationIP
-            // 
-            destinationIP.HeaderText = "DestinationIP";
-            destinationIP.Name = "destinationIP";
-            destinationIP.ReadOnly = true;
-            destinationIP.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // destinationPort
-            // 
-            destinationPort.HeaderText = "Destination Port";
-            destinationPort.Name = "destinationPort";
-            destinationPort.ReadOnly = true;
-            destinationPort.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // protocol
-            // 
-            protocol.HeaderText = "Protocol";
-            protocol.Name = "protocol";
-            protocol.ReadOnly = true;
-            protocol.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // sniffButton
             // 
@@ -241,6 +207,47 @@
             tableLayoutPanel2.Size = new Size(778, 28);
             tableLayoutPanel2.TabIndex = 9;
             // 
+            // sourceIp
+            // 
+            sourceIp.HeaderText = "Source IP";
+            sourceIp.Name = "sourceIp";
+            sourceIp.ReadOnly = true;
+            sourceIp.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // sourcePort
+            // 
+            sourcePort.HeaderText = "Source Port";
+            sourcePort.Name = "sourcePort";
+            sourcePort.ReadOnly = true;
+            sourcePort.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // destinationIP
+            // 
+            destinationIP.HeaderText = "DestinationIP";
+            destinationIP.Name = "destinationIP";
+            destinationIP.ReadOnly = true;
+            destinationIP.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // destinationPort
+            // 
+            destinationPort.HeaderText = "Destination Port";
+            destinationPort.Name = "destinationPort";
+            destinationPort.ReadOnly = true;
+            destinationPort.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // protocol
+            // 
+            protocol.HeaderText = "Protocol";
+            protocol.Name = "protocol";
+            protocol.ReadOnly = true;
+            protocol.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // payload
+            // 
+            payload.HeaderText = "Payload";
+            payload.Name = "payload";
+            payload.ReadOnly = true;
+            // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -284,12 +291,13 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripErrorLabel;
         private TableLayoutPanel tableLayoutPanel1;
+        private CheckBox autoScrollCheckBox;
+        private TableLayoutPanel tableLayoutPanel2;
         private DataGridViewTextBoxColumn sourceIp;
         private DataGridViewTextBoxColumn sourcePort;
         private DataGridViewTextBoxColumn destinationIP;
         private DataGridViewTextBoxColumn destinationPort;
         private DataGridViewTextBoxColumn protocol;
-        private CheckBox autoScrollCheckBox;
-        private TableLayoutPanel tableLayoutPanel2;
+        private DataGridViewTextBoxColumn payload;
     }
 }

@@ -97,8 +97,9 @@ namespace VigilantNetworkMonitor {
                 myPacketWrapper.GetSourcePort(),
                 myPacketWrapper.GetDestinationAddress(),
                 myPacketWrapper.GetDestinationPort(),
-                myPacketWrapper.GetProtocol()
-            );
+                myPacketWrapper.GetProtocol(),
+                myPacketWrapper.GetPayloadHexadecimal()
+            ); ;
 
             if (_generalOptions != null && _generalOptions.IsAutoScrollEnabled()) {
                 ScrollToBottom();
