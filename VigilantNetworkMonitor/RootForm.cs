@@ -11,22 +11,25 @@ namespace VigilantNetworkMonitor {
         private readonly IServiceProvider _serviceProvider;
         private readonly IPacketFilterService _packetFilterService;
         private readonly IGeneralOptions _generalOptions;
+        private readonly IColumnOptions _columnOptions;
 
         public RootForm(
             INetworkOptions networkOptions,
             IServiceProvider serviceProvider,
             IPacketFilterService packetFilterService,
-            IGeneralOptions generalOptions
+            IGeneralOptions generalOptions,
+            IColumnOptions columnOptions
         ) {
             _networkOptions = networkOptions;
             _serviceProvider = serviceProvider;
             _packetFilterService = packetFilterService;
             _generalOptions = generalOptions;
+            _columnOptions = columnOptions;
             InitializeComponent();
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
-            packetDataGridView1.Load(_networkOptions, _packetFilterService, _generalOptions);
+            packetDataGridView1.Load(_networkOptions, _packetFilterService, _generalOptions, _columnOptions);
             autoScrollCheckBox.Checked = _generalOptions.IsAutoScrollEnabled();
         }
 

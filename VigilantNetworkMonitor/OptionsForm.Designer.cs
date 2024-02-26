@@ -28,10 +28,12 @@
             description = new DataGridViewTextBoxColumn();
             tabControl1 = new TabControl();
             networkInterfaces = new TabPage();
-            tabPage2 = new TabPage();
+            columns = new TabPage();
+            columnsCheckedListBox = new CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)networkInterfacesDataGridView).BeginInit();
             tabControl1.SuspendLayout();
             networkInterfaces.SuspendLayout();
+            columns.SuspendLayout();
             SuspendLayout();
             // 
             // networkInterfacesDataGridView
@@ -64,7 +66,7 @@
             // tabControl1
             // 
             tabControl1.Controls.Add(networkInterfaces);
-            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(columns);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
@@ -83,15 +85,25 @@
             networkInterfaces.Text = "Network Interfaces";
             networkInterfaces.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // columns
             // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(768, 236);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            columns.Controls.Add(columnsCheckedListBox);
+            columns.Location = new Point(4, 24);
+            columns.Name = "columns";
+            columns.Padding = new Padding(3);
+            columns.Size = new Size(768, 236);
+            columns.TabIndex = 1;
+            columns.Text = "Columns";
+            columns.UseVisualStyleBackColor = true;
+            // 
+            // columnsCheckedListBox
+            // 
+            columnsCheckedListBox.FormattingEnabled = true;
+            columnsCheckedListBox.Location = new Point(6, 6);
+            columnsCheckedListBox.Name = "columnsCheckedListBox";
+            columnsCheckedListBox.Size = new Size(756, 220);
+            columnsCheckedListBox.TabIndex = 0;
+            columnsCheckedListBox.ItemCheck += columnsCheckedListBox_ItemCheck;
             // 
             // OptionsForm
             // 
@@ -106,6 +118,7 @@
             ((System.ComponentModel.ISupportInitialize)networkInterfacesDataGridView).EndInit();
             tabControl1.ResumeLayout(false);
             networkInterfaces.ResumeLayout(false);
+            columns.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -116,6 +129,7 @@
         private DataGridViewTextBoxColumn description;
         private TabControl tabControl1;
         private TabPage networkInterfaces;
-        private TabPage tabPage2;
+        private TabPage columns;
+        private CheckedListBox columnsCheckedListBox;
     }
 }

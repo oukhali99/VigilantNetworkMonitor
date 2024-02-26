@@ -10,6 +10,7 @@ namespace VigilantNetworkMonitor {
         private IPacketFilterService? _packetFilterService;
         private ICollection<MyPacketWrapper> packets;
         private IGeneralOptions? _generalOptions;
+        private IColumnOptions? _columnOptions;
 
         public PacketsDataGridView() {
             packets = new LinkedList<MyPacketWrapper>();
@@ -18,12 +19,21 @@ namespace VigilantNetworkMonitor {
         public void Load(
             INetworkOptions networkOptions,
             IPacketFilterService packetFilterService,
-            IGeneralOptions generalOptions
+            IGeneralOptions generalOptions,
+            IColumnOptions columnOptions
         ) {
             _packetFilterService = packetFilterService;
             _networkOptions = networkOptions;
             _generalOptions = generalOptions;
             _packetFilterService.AddChangedFilterStringEventHandler(onFilterChanged);
+            _columnOptions = columnOptions;
+
+            // Add the columns to the column options list
+            foreach (DataGridViewColumn column in Columns) {
+                _columnOptions.AddColumn(column);
+            }
+            refreshDisplayedColumns();
+            _columnOptions.AddChangedEnabledColumnsEventHandler(handleEnabledColumnsChangedEvent);
         }
 
         public void StartSniffing() {
@@ -92,6 +102,11 @@ namespace VigilantNetworkMonitor {
                 Invoke(new Action(() => AddPacket(myPacketWrapper)));
                 return;
             }
+            //Rows.Add();
+            //DataGridViewRow newRow = Rows[Rows.Count - 1];
+            //newRow.Cells["sourceIp"].Value = myPacketWrapper.GetSourceAddress();
+            //newRow.Cells["destinationIp"].Value = myPacketWrapper.GetDestinationAddress();
+
             Rows.Add(
                 myPacketWrapper.GetSourceAddress(),
                 myPacketWrapper.GetSourcePort(),
@@ -99,7 +114,7 @@ namespace VigilantNetworkMonitor {
                 myPacketWrapper.GetDestinationPort(),
                 myPacketWrapper.GetProtocol(),
                 myPacketWrapper.GetPayloadHexadecimal()
-            ); ;
+            );
 
             if (_generalOptions != null && _generalOptions.IsAutoScrollEnabled()) {
                 ScrollToBottom();
@@ -134,6 +149,23 @@ namespace VigilantNetworkMonitor {
             }
 
             FirstDisplayedScrollingRowIndex = Rows.Count - 1;
+        }
+
+        private void refreshDisplayedColumns() {
+            if (_columnOptions == null) {
+                return;
+            }
+            if (InvokeRequired) {
+                Invoke(new Action(() => refreshDisplayedColumns()));
+                return;
+            }
+            foreach (DataGridViewColumn column in Columns) {
+                column.Visible = _columnOptions.IsColumnEnabled(column.Name);
+            }
+        }
+
+        private void handleEnabledColumnsChangedEvent(object? sender, EventArgs e) {
+            refreshDisplayedColumns();
         }
 
     }
