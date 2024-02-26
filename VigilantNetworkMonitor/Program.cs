@@ -30,6 +30,7 @@ namespace VigilantNetworkMonitor {
                         services.AddSingleton<IPacketVariableConditionFilterFactory, PacketVariableConditionFilterFactory>();
                         services.AddSingleton<IGeneralOptions, GeneralOptions>();
                         services.AddSingleton<IColumnOptions, ColumnOptions>();
+                        services.AddSingleton<IPacketSnifferService, PacketSnifferService>();
                     }
                 )
                 .Build();

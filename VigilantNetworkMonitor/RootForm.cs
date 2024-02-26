@@ -12,19 +12,22 @@ namespace VigilantNetworkMonitor {
         private readonly IPacketFilterService _packetFilterService;
         private readonly IGeneralOptions _generalOptions;
         private readonly IColumnOptions _columnOptions;
+        private readonly IPacketSnifferService _packetSnifferService;
 
         public RootForm(
             INetworkOptions networkOptions,
             IServiceProvider serviceProvider,
             IPacketFilterService packetFilterService,
             IGeneralOptions generalOptions,
-            IColumnOptions columnOptions
+            IColumnOptions columnOptions,
+            IPacketSnifferService packetSnifferService
         ) {
             _networkOptions = networkOptions;
             _serviceProvider = serviceProvider;
             _packetFilterService = packetFilterService;
             _generalOptions = generalOptions;
             _columnOptions = columnOptions;
+            _packetSnifferService = packetSnifferService;
             InitializeComponent();
         }
 
@@ -45,7 +48,7 @@ namespace VigilantNetworkMonitor {
                 Size = savedWindowSize;
             }
 
-            packetDataGridView1.Load(_networkOptions, _packetFilterService, _generalOptions, _columnOptions);
+            packetDataGridView1.Load(_packetFilterService, _generalOptions, _columnOptions, _packetSnifferService);
             autoScrollCheckBox.Checked = _generalOptions.IsAutoScrollEnabled();
         }
 
@@ -56,14 +59,14 @@ namespace VigilantNetworkMonitor {
                 return;
             }
 
-            if (packetDataGridView1.IsSniffing()) {
-                packetDataGridView1.StopSniffing();
+            if (_packetSnifferService.IsSniffing()) {
+                _packetSnifferService.StopSniffing();
             }
             else {
-                packetDataGridView1.StartSniffing();
+                _packetSnifferService.StartSniffing();
             }
 
-            sniffButton.Text = packetDataGridView1.IsSniffing() ? "Stop" : "Sniff";
+            sniffButton.Text = _packetSnifferService.IsSniffing() ? "Stop" : "Sniff";
         }
 
         private void toolStripExit_Click(object sender, EventArgs e) {
