@@ -1,7 +1,6 @@
 ﻿using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Factory;
-using static VigilantNetworkMonitor.IPacketSnifferService;
 using static VigilantNetworkMonitor.PacketFilter.Service.IPacketFilterService;
 
 namespace VigilantNetworkMonitor.PacketFilter.Service {

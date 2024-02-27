@@ -1,6 +1,4 @@
-﻿
-using System.Data.SqlTypes;
-using VigilantNetworkMonitor.PacketFilter.Service;
+﻿using VigilantNetworkMonitor.PacketFilter.Service;
 
 namespace VigilantNetworkMonitor {
     public partial class OptionsForm : Form {
@@ -42,7 +40,7 @@ namespace VigilantNetworkMonitor {
         }
 
         private void columnsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e) {
-            string columnName = (string)columnsCheckedListBox.Items[e.Index];            
+            string columnName = (string)columnsCheckedListBox.Items[e.Index];
             if (e.CurrentValue == CheckState.Checked) {
                 _columnOptions.DisableColumn(columnName);
             }

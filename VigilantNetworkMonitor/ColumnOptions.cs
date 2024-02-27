@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Specialized;
 
 namespace VigilantNetworkMonitor {
     public interface IColumnOptions {
@@ -19,8 +14,7 @@ namespace VigilantNetworkMonitor {
         private ICollection<DataGridViewColumn> _columns;
         private event EventHandler? _changedEnabledColumnsEvent;
 
-        public ColumnOptions()
-        {
+        public ColumnOptions() {
             _columns = new LinkedList<DataGridViewColumn>();
             if (Properties.Settings.Default.EnabledColumnNames == null) {
                 Properties.Settings.Default.EnabledColumnNames = new StringCollection();

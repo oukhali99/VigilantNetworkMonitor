@@ -1,13 +1,6 @@
 ﻿using PacketDotNet;
 using SharpPcap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VigilantNetworkMonitor.Model;
-using VigilantNetworkMonitor.PacketFilter.Service;
-using static VigilantNetworkMonitor.PacketSnifferService;
 
 namespace VigilantNetworkMonitor {
     public interface IPacketSnifferService {
@@ -21,8 +14,7 @@ namespace VigilantNetworkMonitor {
         class PacketSniffedEventArgs : EventArgs {
             public MyPacketWrapper Packet { get; }
 
-            public PacketSniffedEventArgs(MyPacketWrapper packet)
-            {
+            public PacketSniffedEventArgs(MyPacketWrapper packet) {
                 Packet = packet;
             }
         }

@@ -1,7 +1,6 @@
 ﻿using PacketDotNet;
 using System.Net;
 using System.Text;
-using System.Text.Unicode;
 
 namespace VigilantNetworkMonitor.Model {
     public class MyPacketWrapper {
@@ -79,7 +78,7 @@ namespace VigilantNetworkMonitor.Model {
             TransportPacket? transportPacket = GetTransportPacket();
             if (transportPacket == null) {
                 return null;
-            } 
+            }
             return transportPacket.PayloadData;
         }
 
