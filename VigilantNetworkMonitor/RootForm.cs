@@ -33,12 +33,12 @@ namespace VigilantNetworkMonitor {
             _columnOptions = columnOptions;
             _packetSnifferService = packetSnifferService;
             _packetFilterFactory = packetFilterFactory;
-            _packetFilterService.AddChangedFilterStringEventHandler(handleChangedFilterStringEvent);
+            _packetFilterService.AddChangedActiveFilterEventHandler(handleChangedFilterStringEvent);
 
             InitializeComponent();
         }
 
-        private void handleChangedFilterStringEvent(object sender, FilterStringEventArgs e) {
+        private void handleChangedFilterStringEvent(object sender, ChangedActiveFilterEventArgs e) {
             filterTextBox.Text = e.FilterString;
         }
 
@@ -93,8 +93,8 @@ namespace VigilantNetworkMonitor {
         }
 
         private void applyFilter(string filterString) {
-            _packetFilterService.SetFilterString(filterString);
-            IPacketFilter? filter = _packetFilterService.GetFilter();
+            _packetFilterService.SetActiveFilter(filterString);
+            IPacketFilter? filter = _packetFilterService.GetActiveFilter();
             if (filter == null) {
                 toolStripErrorLabel.Text = "Invalid Filter";
                 return;

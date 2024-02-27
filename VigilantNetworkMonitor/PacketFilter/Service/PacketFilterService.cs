@@ -6,23 +6,23 @@ using static VigilantNetworkMonitor.PacketFilter.Service.IPacketFilterService;
 namespace VigilantNetworkMonitor.PacketFilter.Service {
     public interface IPacketFilterService {
         bool Filter(MyPacketWrapper myPacketWrapper);
-        void SetFilterString(string filterString);
-        public IPacketFilter? GetFilter();
+        void SetActiveFilter(string filterString);
+        public IPacketFilter? GetActiveFilter();
         public void SaveFilter(string filterName, string filterString);
-        public Dictionary<string, string> GetFiltersByName();
+        public Dictionary<string, string> GetSavedFilters();
 
-        void AddChangedFilterStringEventHandler(FilterStringEventHandler handler);
-        delegate void FilterStringEventHandler(object sender, FilterStringEventArgs e);
-        class FilterStringEventArgs : EventArgs {
+        void AddChangedActiveFilterEventHandler(ChangedActiveFilterEventHandler handler);
+        delegate void ChangedActiveFilterEventHandler(object sender, ChangedActiveFilterEventArgs e);
+        class ChangedActiveFilterEventArgs : EventArgs {
             public string FilterString { get; }
-            public FilterStringEventArgs(string filterString) {
+            public ChangedActiveFilterEventArgs(string filterString) {
                 FilterString = filterString;
             }
         }
     }
 
     public class PacketFilterService : IPacketFilterService {
-        private event FilterStringEventHandler? _changedFilterString;
+        private event ChangedActiveFilterEventHandler? _changedFilterString;
         private IPacketFilter? _filter;
         private readonly IPacketFilterFactory _packetFilterFactory;
 
@@ -41,16 +41,16 @@ namespace VigilantNetworkMonitor.PacketFilter.Service {
             return _filter.Filter(myPacketWrapper);
         }
 
-        public void SetFilterString(string filterString) {
+        public void SetActiveFilter(string filterString) {
             _filter = _packetFilterFactory.ParseString(filterString);
-            _changedFilterString?.Invoke(this, new FilterStringEventArgs(filterString));
+            _changedFilterString?.Invoke(this, new ChangedActiveFilterEventArgs(filterString));
         }
 
-        public void AddChangedFilterStringEventHandler(FilterStringEventHandler handler) {
+        public void AddChangedActiveFilterEventHandler(ChangedActiveFilterEventHandler handler) {
             _changedFilterString += handler;
         }
 
-        public IPacketFilter? GetFilter() {
+        public IPacketFilter? GetActiveFilter() {
             return _filter;
         }
 
@@ -60,7 +60,7 @@ namespace VigilantNetworkMonitor.PacketFilter.Service {
             Properties.Settings.Default.Save();
         }
 
-        public Dictionary<string, string> GetFiltersByName() {
+        public Dictionary<string, string> GetSavedFilters() {
             Dictionary<string, string> filtersByName = new Dictionary<string, string>();
 
             foreach (string? combined in Properties.Settings.Default.SavedFilters) {

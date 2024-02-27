@@ -11,7 +11,7 @@ namespace VigilantNetworkMonitor {
         public void Init(IPacketFilterService packetFilterService) {
             _packetFilterService = packetFilterService;
 
-            foreach (KeyValuePair<string, string> filterPair in packetFilterService.GetFiltersByName()) {
+            foreach (KeyValuePair<string, string> filterPair in packetFilterService.GetSavedFilters()) {
                 string filterName = filterPair.Key;
                 string filterString = filterPair.Value;
                 dataGridView.Rows.Add(filterName, filterString);
@@ -30,7 +30,7 @@ namespace VigilantNetworkMonitor {
                 return;
             }
 
-            _packetFilterService.SetFilterString(filterString);
+            _packetFilterService.SetActiveFilter(filterString);
         }
     }
 }

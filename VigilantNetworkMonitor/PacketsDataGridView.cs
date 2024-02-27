@@ -17,7 +17,7 @@ namespace VigilantNetworkMonitor {
         ) {
             _packetFilterService = packetFilterService;
             _generalOptions = generalOptions;
-            _packetFilterService.AddChangedFilterStringEventHandler(onFilterChanged);
+            _packetFilterService.AddChangedActiveFilterEventHandler(onFilterChanged);
             _columnOptions = columnOptions;
             _packetSnifferService = packetSnifferService;
 
@@ -62,7 +62,7 @@ namespace VigilantNetworkMonitor {
             }
         }
 
-        private void onFilterChanged(object? sender, IPacketFilterService.FilterStringEventArgs e) {
+        private void onFilterChanged(object? sender, IPacketFilterService.ChangedActiveFilterEventArgs e) {
             if (_packetFilterService == null || _packetSnifferService == null) {
                 return;
             }
