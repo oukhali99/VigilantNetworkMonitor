@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketFilter.Base;
 using VigilantNetworkMonitor.PacketFilter.Service;
+using static VigilantNetworkMonitor.PacketFilter.Service.IPacketFilterService;
 
 namespace VigilantNetworkMonitor {
     public partial class RootForm : Form {
@@ -28,7 +29,14 @@ namespace VigilantNetworkMonitor {
             _generalOptions = generalOptions;
             _columnOptions = columnOptions;
             _packetSnifferService = packetSnifferService;
+
+            _packetFilterService.AddChangedFilterStringEventHandler(handleChangedFilterStringEvent);
+
             InitializeComponent();
+        }
+
+        private void handleChangedFilterStringEvent(object sender, FilterStringEventArgs e) {
+            filterTextBox.Text = e.FilterString;
         }
 
         private void RootForm_Load(object sender, EventArgs e) {
@@ -100,6 +108,12 @@ namespace VigilantNetworkMonitor {
             Properties.Settings.Default.WindowLocation = Location;
             Properties.Settings.Default.WindowSize = Size;
             Properties.Settings.Default.Save();
+        }
+
+        private void saveFilterButton_Click(object sender, EventArgs e) {
+            SaveFilterForm saveFilterForm = _serviceProvider.GetRequiredService<SaveFilterForm>();
+            saveFilterForm.FilterString = _packetFilterService.GetFilter()?.GetFilterString();
+            saveFilterForm.ShowDialog();
         }
     }
 }

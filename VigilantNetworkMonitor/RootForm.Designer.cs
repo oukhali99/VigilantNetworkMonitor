@@ -43,6 +43,7 @@
             statusStrip1 = new StatusStrip();
             toolStripErrorLabel = new ToolStripStatusLabel();
             tableLayoutPanel1 = new TableLayoutPanel();
+            saveFilterButton = new Button();
             autoScrollCheckBox = new CheckBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)packetDataGridView1).BeginInit();
@@ -65,7 +66,7 @@
             packetDataGridView1.Location = new Point(12, 62);
             packetDataGridView1.Name = "packetDataGridView1";
             packetDataGridView1.ReadOnly = true;
-            packetDataGridView1.Size = new Size(778, 310);
+            packetDataGridView1.Size = new Size(963, 401);
             packetDataGridView1.TabIndex = 0;
             // 
             // sourceIp
@@ -120,9 +121,9 @@
             // sniffButton
             // 
             sniffButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            sniffButton.Location = new Point(664, 3);
+            sniffButton.Location = new Point(831, 3);
             sniffButton.Name = "sniffButton";
-            sniffButton.Size = new Size(69, 23);
+            sniffButton.Size = new Size(87, 23);
             sniffButton.TabIndex = 2;
             sniffButton.Text = "Sniff";
             sniffButton.UseVisualStyleBackColor = true;
@@ -133,7 +134,7 @@
             menuStrip.Items.AddRange(new ToolStripItem[] { file, tools });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(802, 24);
+            menuStrip.Size = new Size(987, 24);
             menuStrip.TabIndex = 3;
             menuStrip.Text = "menuStrip1";
             // 
@@ -172,7 +173,7 @@
             filterTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             filterTextBox.Location = new Point(3, 3);
             filterTextBox.Name = "filterTextBox";
-            filterTextBox.Size = new Size(582, 23);
+            filterTextBox.Size = new Size(638, 23);
             filterTextBox.TabIndex = 4;
             // 
             // label1
@@ -189,9 +190,9 @@
             // applyFilterButton
             // 
             applyFilterButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            applyFilterButton.Location = new Point(591, 3);
+            applyFilterButton.Location = new Point(647, 3);
             applyFilterButton.Name = "applyFilterButton";
-            applyFilterButton.Size = new Size(67, 23);
+            applyFilterButton.Size = new Size(86, 23);
             applyFilterButton.TabIndex = 6;
             applyFilterButton.Text = "Apply";
             applyFilterButton.UseVisualStyleBackColor = true;
@@ -200,9 +201,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripErrorLabel });
-            statusStrip1.Location = new Point(0, 409);
+            statusStrip1.Location = new Point(0, 500);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(802, 22);
+            statusStrip1.Size = new Size(987, 22);
             statusStrip1.TabIndex = 7;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -215,30 +216,41 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tableLayoutPanel1.ColumnCount = 4;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.Controls.Add(applyFilterButton, 1, 0);
             tableLayoutPanel1.Controls.Add(filterTextBox, 0, 0);
-            tableLayoutPanel1.Controls.Add(sniffButton, 2, 0);
+            tableLayoutPanel1.Controls.Add(sniffButton, 3, 0);
+            tableLayoutPanel1.Controls.Add(saveFilterButton, 2, 0);
             tableLayoutPanel1.Location = new Point(54, 27);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(736, 29);
+            tableLayoutPanel1.Size = new Size(921, 29);
             tableLayoutPanel1.TabIndex = 8;
+            // 
+            // saveFilterButton
+            // 
+            saveFilterButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            saveFilterButton.Location = new Point(739, 3);
+            saveFilterButton.Name = "saveFilterButton";
+            saveFilterButton.Size = new Size(86, 23);
+            saveFilterButton.TabIndex = 7;
+            saveFilterButton.Text = "Save";
+            saveFilterButton.UseVisualStyleBackColor = true;
+            saveFilterButton.Click += saveFilterButton_Click;
             // 
             // autoScrollCheckBox
             // 
             autoScrollCheckBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             autoScrollCheckBox.AutoSize = true;
-            autoScrollCheckBox.Location = new Point(664, 3);
+            autoScrollCheckBox.Location = new Point(821, 3);
             autoScrollCheckBox.Name = "autoScrollCheckBox";
             autoScrollCheckBox.RightToLeft = RightToLeft.Yes;
-            autoScrollCheckBox.Size = new Size(111, 22);
+            autoScrollCheckBox.Size = new Size(139, 22);
             autoScrollCheckBox.TabIndex = 0;
             autoScrollCheckBox.Text = "Auto Scroll";
             autoScrollCheckBox.UseVisualStyleBackColor = true;
@@ -251,18 +263,18 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 85F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
             tableLayoutPanel2.Controls.Add(autoScrollCheckBox, 1, 0);
-            tableLayoutPanel2.Location = new Point(12, 378);
+            tableLayoutPanel2.Location = new Point(12, 469);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(778, 28);
+            tableLayoutPanel2.Size = new Size(963, 28);
             tableLayoutPanel2.TabIndex = 9;
             // 
             // RootForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(802, 431);
+            ClientSize = new Size(987, 522);
             Controls.Add(label1);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(tableLayoutPanel1);
@@ -311,5 +323,6 @@
         private DataGridViewTextBoxColumn protocol;
         private DataGridViewTextBoxColumn payloadHex;
         private DataGridViewTextBoxColumn payloadBase64;
+        private Button saveFilterButton;
     }
 }

@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using VigilantNetworkMonitor.PacketFilter.Service;
+
+namespace VigilantNetworkMonitor {
+    public partial class SavedFiltersControl : UserControl {
+        private IPacketFilterService? _packetFilterService;
+
+        public SavedFiltersControl() {
+            InitializeComponent();
+        }
+
+        public void Init(IPacketFilterService packetFilterService) {
+            _packetFilterService = packetFilterService;
+
+            foreach (KeyValuePair<string, string> filterPair in packetFilterService.GetFiltersByName()) {
+                string filterName = filterPair.Key;
+                string filterString = filterPair.Value;
+                dataGridView.Rows.Add(filterName, filterString);
+            }
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
+            if (_packetFilterService == null) {
+                return;
+            }
+            
+            DataGridViewRow row = dataGridView.Rows[e.RowIndex];
+            string? filterString = row.Cells["value"].Value.ToString();
+
+            if (filterString == null) {
+                return;
+            }
+
+            _packetFilterService.SetFilterString(filterString);
+        }
+    }
+}

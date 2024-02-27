@@ -31,6 +31,7 @@ namespace VigilantNetworkMonitor {
                         services.AddSingleton<IGeneralOptions, GeneralOptions>();
                         services.AddSingleton<IColumnOptions, ColumnOptions>();
                         services.AddSingleton<IPacketSnifferService, PacketSnifferService>();
+                        services.AddTransient<SaveFilterForm>();
                     }
                 )
                 .Build();

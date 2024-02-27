@@ -13,6 +13,13 @@
     <Compile Update="RootForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="SavedFiltersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Update="SaveFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

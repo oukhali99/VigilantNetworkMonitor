@@ -1,13 +1,22 @@
 ﻿
+using System.Data.SqlTypes;
+using VigilantNetworkMonitor.PacketFilter.Service;
+
 namespace VigilantNetworkMonitor {
     public partial class OptionsForm : Form {
 
         private readonly INetworkOptions _networkOptions;
         private readonly IColumnOptions _columnOptions;
+        private readonly IPacketFilterService _packetFilterService;
 
-        public OptionsForm(INetworkOptions networkOptions, IColumnOptions columnOptions) {
+        public OptionsForm(
+            INetworkOptions networkOptions,
+            IColumnOptions columnOptions,
+            IPacketFilterService packetFilterService
+        ) {
             _networkOptions = networkOptions;
             _columnOptions = columnOptions;
+            _packetFilterService = packetFilterService;
             InitializeComponent();
         }
 
@@ -17,6 +26,7 @@ namespace VigilantNetworkMonitor {
                 bool enabled = _columnOptions.IsColumnEnabled(column.Name);
                 columnsCheckedListBox.Items.Add(column.Name, enabled);
             }
+            savedFiltersControl.Init(_packetFilterService);
         }
 
         internal NetworkInterfacesDataGridView GetNetworkInterfacesDataGridView() {

@@ -64,7 +64,7 @@ namespace VigilantNetworkMonitor {
             }
         }
 
-        private void onFilterChanged(object? sender, EventArgs e) {
+        private void onFilterChanged(object? sender, IPacketFilterService.FilterStringEventArgs e) {
             if (_packetFilterService == null || _packetSnifferService == null) {
                 return;
             }

@@ -84,5 +84,16 @@ namespace VigilantNetworkMonitor.Properties {
                 this["WindowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection SavedFilters {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["SavedFilters"]));
+            }
+            set {
+                this["SavedFilters"] = value;
+            }
+        }
     }
 }

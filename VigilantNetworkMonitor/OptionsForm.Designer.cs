@@ -30,10 +30,13 @@
             networkInterfaces = new TabPage();
             columns = new TabPage();
             columnsCheckedListBox = new CheckedListBox();
+            savedFilters = new TabPage();
+            savedFiltersControl = new SavedFiltersControl();
             ((System.ComponentModel.ISupportInitialize)networkInterfacesDataGridView).BeginInit();
             tabControl1.SuspendLayout();
             networkInterfaces.SuspendLayout();
             columns.SuspendLayout();
+            savedFilters.SuspendLayout();
             SuspendLayout();
             // 
             // networkInterfacesDataGridView
@@ -67,6 +70,7 @@
             // 
             tabControl1.Controls.Add(networkInterfaces);
             tabControl1.Controls.Add(columns);
+            tabControl1.Controls.Add(savedFilters);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
@@ -105,6 +109,24 @@
             columnsCheckedListBox.TabIndex = 0;
             columnsCheckedListBox.ItemCheck += columnsCheckedListBox_ItemCheck;
             // 
+            // savedFilters
+            // 
+            savedFilters.Controls.Add(savedFiltersControl);
+            savedFilters.Location = new Point(4, 24);
+            savedFilters.Name = "savedFilters";
+            savedFilters.Padding = new Padding(3);
+            savedFilters.Size = new Size(768, 236);
+            savedFilters.TabIndex = 2;
+            savedFilters.Text = "Saved Filters";
+            savedFilters.UseVisualStyleBackColor = true;
+            // 
+            // savedFiltersControl
+            // 
+            savedFiltersControl.Location = new Point(6, 6);
+            savedFiltersControl.Name = "savedFiltersControl";
+            savedFiltersControl.Size = new Size(756, 224);
+            savedFiltersControl.TabIndex = 0;
+            // 
             // OptionsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -119,6 +141,7 @@
             tabControl1.ResumeLayout(false);
             networkInterfaces.ResumeLayout(false);
             columns.ResumeLayout(false);
+            savedFilters.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -131,5 +154,7 @@
         private TabPage networkInterfaces;
         private TabPage columns;
         private CheckedListBox columnsCheckedListBox;
+        private TabPage savedFilters;
+        private SavedFiltersControl savedFiltersControl;
     }
 }
