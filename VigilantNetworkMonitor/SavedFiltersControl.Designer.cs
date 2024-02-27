@@ -29,7 +29,6 @@ namespace VigilantNetworkMonitor {
             dataGridView = new DataGridView();
             name = new DataGridViewTextBoxColumn();
             value = new DataGridViewTextBoxColumn();
-            Select = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -40,12 +39,12 @@ namespace VigilantNetworkMonitor {
             dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Columns.AddRange(new DataGridViewColumn[] { name, value, Select });
+            dataGridView.Columns.AddRange(new DataGridViewColumn[] { name, value });
             dataGridView.Location = new Point(0, 0);
             dataGridView.Name = "dataGridView";
             dataGridView.Size = new Size(869, 437);
             dataGridView.TabIndex = 2;
-            dataGridView.CellDoubleClick += this.dataGridView_CellDoubleClick;
+            dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
             // 
             // name
             // 
@@ -58,12 +57,6 @@ namespace VigilantNetworkMonitor {
             value.FillWeight = 60F;
             value.HeaderText = "Value";
             value.Name = "value";
-            // 
-            // Select
-            // 
-            Select.FillWeight = 20F;
-            Select.HeaderText = "Select";
-            Select.Name = "Select";
             // 
             // SavedFiltersControl
             // 
@@ -80,6 +73,5 @@ namespace VigilantNetworkMonitor {
         private DataGridView dataGridView;
         private DataGridViewTextBoxColumn name;
         private DataGridViewTextBoxColumn value;
-        private DataGridViewButtonColumn Select;
     }
 }

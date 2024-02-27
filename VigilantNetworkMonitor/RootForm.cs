@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using VigilantNetworkMonitor.Model;
 using VigilantNetworkMonitor.PacketFilter.Base;
+using VigilantNetworkMonitor.PacketFilter.Factory;
 using VigilantNetworkMonitor.PacketFilter.Service;
 using static VigilantNetworkMonitor.PacketFilter.Service.IPacketFilterService;
 
@@ -14,6 +15,7 @@ namespace VigilantNetworkMonitor {
         private readonly IGeneralOptions _generalOptions;
         private readonly IColumnOptions _columnOptions;
         private readonly IPacketSnifferService _packetSnifferService;
+        private readonly IPacketFilterFactory _packetFilterFactory;
 
         public RootForm(
             INetworkOptions networkOptions,
@@ -21,7 +23,8 @@ namespace VigilantNetworkMonitor {
             IPacketFilterService packetFilterService,
             IGeneralOptions generalOptions,
             IColumnOptions columnOptions,
-            IPacketSnifferService packetSnifferService
+            IPacketSnifferService packetSnifferService,
+            IPacketFilterFactory packetFilterFactory
         ) {
             _networkOptions = networkOptions;
             _serviceProvider = serviceProvider;
@@ -29,7 +32,7 @@ namespace VigilantNetworkMonitor {
             _generalOptions = generalOptions;
             _columnOptions = columnOptions;
             _packetSnifferService = packetSnifferService;
-
+            _packetFilterFactory = packetFilterFactory;
             _packetFilterService.AddChangedFilterStringEventHandler(handleChangedFilterStringEvent);
 
             InitializeComponent();
@@ -86,14 +89,18 @@ namespace VigilantNetworkMonitor {
         }
 
         private void applyFilterButton_Click(object sender, EventArgs e) {
-            _packetFilterService.SetFilterString(filterTextBox.Text);
+            applyFilter(filterTextBox.Text);
+        }
+
+        private void applyFilter(string filterString) {
+            _packetFilterService.SetFilterString(filterString);
             IPacketFilter? filter = _packetFilterService.GetFilter();
             if (filter == null) {
                 toolStripErrorLabel.Text = "Invalid Filter";
                 return;
             }
             toolStripErrorLabel.Text = "";
-            //filterTextBox.Text = filter.GetFilterString();
+            //filterString = filter.GetFilterString();
         }
 
         private void autoScrollCheckBox_CheckedChanged(object sender, EventArgs e) {
@@ -111,8 +118,16 @@ namespace VigilantNetworkMonitor {
         }
 
         private void saveFilterButton_Click(object sender, EventArgs e) {
+            string filterString = filterTextBox.Text;
+            applyFilter(filterString);
+
+            IPacketFilter? packetFilter = _packetFilterFactory.ParseString(filterString);
+            if (packetFilter == null) {
+                return;
+            }
+
             SaveFilterForm saveFilterForm = _serviceProvider.GetRequiredService<SaveFilterForm>();
-            saveFilterForm.FilterString = _packetFilterService.GetFilter()?.GetFilterString();
+            saveFilterForm.Init(filterString);
             saveFilterForm.ShowDialog();
         }
     }
