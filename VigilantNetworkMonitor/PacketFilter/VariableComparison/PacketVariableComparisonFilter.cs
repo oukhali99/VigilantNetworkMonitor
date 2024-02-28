@@ -4,18 +4,18 @@ using VigilantNetworkMonitor.PacketFilter.VariableComparison.Base;
 using VigilantNetworkMonitor.PacketVariable.Base;
 
 namespace VigilantNetworkMonitor.PacketFilter.VariableComparison {
-    internal class PacketVariableConditionFilter : IPacketVariableConditionFilter {
+    internal class PacketVariableComparisonFilter : IPacketVariableComparisonFilter {
         private readonly IPacketVariable _variable1;
-        private readonly ICondition _condition;
+        private readonly IComparison _comparison;
         private readonly IPacketVariable _variable2;
 
-        internal PacketVariableConditionFilter(
+        internal PacketVariableComparisonFilter(
             IPacketVariable variable1,
-            ICondition condition,
+            IComparison comparison,
             IPacketVariable variable2
         ) {
             _variable1 = variable1;
-            _condition = condition;
+            _comparison = comparison;
             _variable2 = variable2;
         }
 
@@ -27,11 +27,11 @@ namespace VigilantNetworkMonitor.PacketFilter.VariableComparison {
                 return false;
             }
 
-            return _condition.Evaluate(val1, val2);
+            return _comparison.Evaluate(val1, val2);
         }
 
         public string GetFilterString() {
-            return _variable1.GetVariableName() + _condition.GetConditionString() + _variable2.GetVariableName();
+            return _variable1.GetVariableName() + _comparison.GetComparisonString() + _variable2.GetVariableName();
         }
     }
 }

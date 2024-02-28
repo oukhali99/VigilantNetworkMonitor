@@ -1,5 +1,5 @@
 ﻿using VigilantNetworkMonitor.PacketFilter.Base;
-using VigilantNetworkMonitor.PacketFilter.VariableCondition.Factory;
+using VigilantNetworkMonitor.PacketFilter.VariableComparison.Factory;
 
 namespace VigilantNetworkMonitor.PacketFilter.Factory {
     public interface IPacketFilterFactory {
@@ -7,9 +7,9 @@ namespace VigilantNetworkMonitor.PacketFilter.Factory {
     }
 
     public class PacketFilterFactory : IPacketFilterFactory {
-        private readonly IPacketVariableConditionFilterFactory _packetVariableFilterFactory;
+        private readonly IPacketVariableComparisonFilterFactory _packetVariableFilterFactory;
 
-        public PacketFilterFactory(IPacketVariableConditionFilterFactory packetVariableFilterFactory) {
+        public PacketFilterFactory(IPacketVariableComparisonFilterFactory packetVariableFilterFactory) {
             _packetVariableFilterFactory = packetVariableFilterFactory;
         }
 
