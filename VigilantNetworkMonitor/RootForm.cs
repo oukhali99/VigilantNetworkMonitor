@@ -7,8 +7,7 @@ using VigilantNetworkMonitor.Packet.Filter.Service;
 using VigilantNetworkMonitor.Service;
 using static VigilantNetworkMonitor.Packet.Filter.Service.IPacketFilterService;
 
-namespace VigilantNetworkMonitor
-{
+namespace VigilantNetworkMonitor {
     public partial class RootForm : Form {
 
         private readonly INetworkOptions _networkOptions;

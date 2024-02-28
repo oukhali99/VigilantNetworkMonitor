@@ -1,9 +1,7 @@
 ﻿using System.Collections.Specialized;
 
-namespace VigilantNetworkMonitor.Service
-{
-    public interface IColumnOptions
-    {
+namespace VigilantNetworkMonitor.Service {
+    public interface IColumnOptions {
         bool IsColumnEnabled(string columnName);
         void EnableColumn(string columnName);
         void DisableColumn(string columnName);
@@ -12,24 +10,19 @@ namespace VigilantNetworkMonitor.Service
         void AddChangedEnabledColumnsEventHandler(EventHandler handler);
     }
 
-    internal class ColumnOptions : IColumnOptions
-    {
+    internal class ColumnOptions : IColumnOptions {
         private ICollection<DataGridViewColumn> _columns;
         private event EventHandler? _changedEnabledColumnsEvent;
 
-        public ColumnOptions()
-        {
+        public ColumnOptions() {
             _columns = new LinkedList<DataGridViewColumn>();
-            if (Properties.Settings.Default.EnabledColumnNames == null)
-            {
+            if (Properties.Settings.Default.EnabledColumnNames == null) {
                 Properties.Settings.Default.EnabledColumnNames = new StringCollection();
             }
         }
 
-        public void EnableColumn(string columnName)
-        {
-            if (Properties.Settings.Default.EnabledColumnNames.Contains(columnName))
-            {
+        public void EnableColumn(string columnName) {
+            if (Properties.Settings.Default.EnabledColumnNames.Contains(columnName)) {
                 return;
             }
             Properties.Settings.Default.EnabledColumnNames.Add(columnName);
@@ -37,10 +30,8 @@ namespace VigilantNetworkMonitor.Service
             _changedEnabledColumnsEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        public void DisableColumn(string columnName)
-        {
-            if (!Properties.Settings.Default.EnabledColumnNames.Contains(columnName))
-            {
+        public void DisableColumn(string columnName) {
+            if (!Properties.Settings.Default.EnabledColumnNames.Contains(columnName)) {
                 return;
             }
             Properties.Settings.Default.EnabledColumnNames.Remove(columnName);
@@ -48,23 +39,19 @@ namespace VigilantNetworkMonitor.Service
             _changedEnabledColumnsEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        public bool IsColumnEnabled(string columnName)
-        {
+        public bool IsColumnEnabled(string columnName) {
             return Properties.Settings.Default.EnabledColumnNames.Contains(columnName);
         }
 
-        public ICollection<DataGridViewColumn> GetColumns()
-        {
+        public ICollection<DataGridViewColumn> GetColumns() {
             return _columns;
         }
 
-        public void AddColumn(DataGridViewColumn column)
-        {
+        public void AddColumn(DataGridViewColumn column) {
             _columns.Add(column);
         }
 
-        public void AddChangedEnabledColumnsEventHandler(EventHandler handler)
-        {
+        public void AddChangedEnabledColumnsEventHandler(EventHandler handler) {
             _changedEnabledColumnsEvent += handler;
         }
 

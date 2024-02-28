@@ -1,24 +1,19 @@
 ﻿using VigilantNetworkMonitor.Packet.Filter.Base;
 using VigilantNetworkMonitor.Packet.Filter.VariableComparison.Factory;
 
-namespace VigilantNetworkMonitor.Packet.Filter.Factory
-{
-    public interface IPacketFilterFactory
-    {
+namespace VigilantNetworkMonitor.Packet.Filter.Factory {
+    public interface IPacketFilterFactory {
         public IPacketFilter? ParseString(string filterString);
     }
 
-    public class PacketFilterFactory : IPacketFilterFactory
-    {
+    public class PacketFilterFactory : IPacketFilterFactory {
         private readonly IPacketVariableComparisonFilterFactory _packetVariableFilterFactory;
 
-        public PacketFilterFactory(IPacketVariableComparisonFilterFactory packetVariableFilterFactory)
-        {
+        public PacketFilterFactory(IPacketVariableComparisonFilterFactory packetVariableFilterFactory) {
             _packetVariableFilterFactory = packetVariableFilterFactory;
         }
 
-        private string formatString(string filterString)
-        {
+        private string formatString(string filterString) {
             filterString = filterString.Replace(" <", "<");
             filterString = filterString.Replace("< ", "<");
             filterString = filterString.Replace(" >", ">");
@@ -28,15 +23,13 @@ namespace VigilantNetworkMonitor.Packet.Filter.Factory
             return filterString;
         }
 
-        public IPacketFilter? ParseString(string filterString)
-        {
+        public IPacketFilter? ParseString(string filterString) {
             filterString = formatString(filterString);
 
             string[] split = filterString.Split(" ", StringSplitOptions.None);
 
             // Only 1 split, this means there are no spaces
-            if (split.Length == 1)
-            {
+            if (split.Length == 1) {
                 return ParseSpacelessString(split[0]);
             }
 
@@ -50,12 +43,10 @@ namespace VigilantNetworkMonitor.Packet.Filter.Factory
              */
             int parenthesisBalance = 0;
             string currentElement = "";
-            for (int i = 0; i < split.Length; i++)
-            {
+            for (int i = 0; i < split.Length; i++) {
                 string splitItem = split[i];
 
-                if (currentElement.Length > 0)
-                {
+                if (currentElement.Length > 0) {
                     currentElement += " ";
                 }
                 currentElement += splitItem;
@@ -68,37 +59,31 @@ namespace VigilantNetworkMonitor.Packet.Filter.Factory
                     parenthesisBalance == 0 &&
                     // If we already have the 2 first elements, keep accumulating
                     elements.Count < 2
-                    )
-                {
+                    ) {
                     elements.Add(currentElement);
                     currentElement = "";
                 }
             }
 
             // Whatever is accumulated is the 3rd element, the rest of the filter
-            if (currentElement.Length > 0)
-            {
+            if (currentElement.Length > 0) {
                 elements.Add(currentElement);
             }
 
             // Only 1 element, this means it must be a parenthesis
-            if (elements.Count == 1)
-            {
+            if (elements.Count == 1) {
                 string trimmedBlock = elements.ElementAt(0);
 
                 // Is there enough characters for 2 parenthesis?
-                if (trimmedBlock.Length < 2)
-                {
+                if (trimmedBlock.Length < 2) {
                     return null;
                 }
                 // Are there parenthesis?
-                if (trimmedBlock[0] != '(')
-                {
+                if (trimmedBlock[0] != '(') {
                     return null;
                 }
                 // Are there parenthesis?
-                if (trimmedBlock[trimmedBlock.Length - 1] != ')')
-                {
+                if (trimmedBlock[trimmedBlock.Length - 1] != ')') {
                     return null;
                 }
 
@@ -108,8 +93,7 @@ namespace VigilantNetworkMonitor.Packet.Filter.Factory
             }
 
             // Are there only 2 elements? Not valid
-            if (elements.Count == 2)
-            {
+            if (elements.Count == 2) {
                 return null;
             }
 
@@ -120,8 +104,7 @@ namespace VigilantNetworkMonitor.Packet.Filter.Factory
 
             IPacketFilter? filter1 = ParseString(firstBlock);
             IPacketFilter? filter2 = ParseString(restFilter);
-            if (filter1 == null || filter2 == null)
-            {
+            if (filter1 == null || filter2 == null) {
                 return null;
             }
 
@@ -130,15 +113,13 @@ namespace VigilantNetworkMonitor.Packet.Filter.Factory
              * It makes sense when you think about it
              * The filter resolves the inner filters first
              */
-            if (firstOperator.Equals("or"))
-            {
+            if (firstOperator.Equals("or")) {
                 return new PacketFilterOrConcatenator(
                     filter1,
                     filter2
                 );
             }
-            if (firstOperator.Equals("and"))
-            {
+            if (firstOperator.Equals("and")) {
                 return new PacketFilterAndConcatenator(
                     filter1,
                     filter2
@@ -148,20 +129,16 @@ namespace VigilantNetworkMonitor.Packet.Filter.Factory
             return null;
         }
 
-        private IPacketFilter? ParseSpacelessString(string spaceLessString)
-        {
-            if (spaceLessString.Equals("udp"))
-            {
+        private IPacketFilter? ParseSpacelessString(string spaceLessString) {
+            if (spaceLessString.Equals("udp")) {
                 return new UdpPacketFilter();
             }
-            if (spaceLessString.Equals("tcp"))
-            {
+            if (spaceLessString.Equals("tcp")) {
                 return new TcpPacketFilter();
             }
 
             IPacketFilter? comparisonFilter = _packetVariableFilterFactory.parseComparison(spaceLessString);
-            if (comparisonFilter != null)
-            {
+            if (comparisonFilter != null) {
                 return comparisonFilter;
             }
 

@@ -1,7 +1,6 @@
 ﻿using VigilantNetworkMonitor.Packet.Filter.Service;
 
-namespace VigilantNetworkMonitor
-{
+namespace VigilantNetworkMonitor {
     public partial class SaveFilterForm : Form {
         private readonly IPacketFilterService _packetFilterService;
 

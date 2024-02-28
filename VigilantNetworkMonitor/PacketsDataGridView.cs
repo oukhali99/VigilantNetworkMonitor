@@ -2,8 +2,7 @@
 using VigilantNetworkMonitor.Packet.Filter.Service;
 using VigilantNetworkMonitor.Service;
 
-namespace VigilantNetworkMonitor
-{
+namespace VigilantNetworkMonitor {
     public class PacketsDataGridView : DataGridView {
 
         private IPacketFilterService? _packetFilterService;

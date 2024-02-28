@@ -1,11 +1,9 @@
 ﻿using SharpPcap;
 using VigilantNetworkMonitor.Model;
 
-namespace VigilantNetworkMonitor.Service
-{
+namespace VigilantNetworkMonitor.Service {
 
-    public interface INetworkOptions
-    {
+    public interface INetworkOptions {
 
         MyCaptureDeviceWrapper? GetSelectedCaptureDeviceWrapper();
         void SetSelectedCaptureDeviceWrapper(MyCaptureDeviceWrapper selectedCaptureDeviceWrapper);
@@ -13,50 +11,40 @@ namespace VigilantNetworkMonitor.Service
 
     }
 
-    internal class NetworkOptions : INetworkOptions
-    {
+    internal class NetworkOptions : INetworkOptions {
 
         private MyCaptureDeviceWrapper? selectedCaptureDeviceWrapper;
 
-        public NetworkOptions()
-        {
+        public NetworkOptions() {
             CaptureDeviceList devices = CaptureDeviceList.Instance;
-            foreach (ICaptureDevice dev in devices)
-            {
+            foreach (ICaptureDevice dev in devices) {
                 MyCaptureDeviceWrapper myCaptureDeviceWrapper = new MyCaptureDeviceWrapper(dev);
-                if (myCaptureDeviceWrapper.IpAddress == null)
-                {
+                if (myCaptureDeviceWrapper.IpAddress == null) {
                     continue;
                 }
 
-                if (myCaptureDeviceWrapper.GetName().Equals(Properties.Settings.Default.SelectedCaptureDeviceName))
-                {
+                if (myCaptureDeviceWrapper.GetName().Equals(Properties.Settings.Default.SelectedCaptureDeviceName)) {
                     selectedCaptureDeviceWrapper = myCaptureDeviceWrapper;
                 }
             }
         }
 
-        public MyCaptureDeviceWrapper? GetSelectedCaptureDeviceWrapper()
-        {
+        public MyCaptureDeviceWrapper? GetSelectedCaptureDeviceWrapper() {
             return selectedCaptureDeviceWrapper;
         }
 
-        public void SetSelectedCaptureDeviceWrapper(MyCaptureDeviceWrapper selectedCaptureDeviceWrapper)
-        {
+        public void SetSelectedCaptureDeviceWrapper(MyCaptureDeviceWrapper selectedCaptureDeviceWrapper) {
             this.selectedCaptureDeviceWrapper = selectedCaptureDeviceWrapper;
             Properties.Settings.Default.SelectedCaptureDeviceName = selectedCaptureDeviceWrapper.GetName();
             Properties.Settings.Default.Save();
         }
 
-        public ICollection<MyCaptureDeviceWrapper> GetDeviceList()
-        {
+        public ICollection<MyCaptureDeviceWrapper> GetDeviceList() {
             ICollection<MyCaptureDeviceWrapper> deviceList = new LinkedList<MyCaptureDeviceWrapper>();
             CaptureDeviceList devices = CaptureDeviceList.Instance;
-            foreach (ICaptureDevice dev in devices)
-            {
+            foreach (ICaptureDevice dev in devices) {
                 MyCaptureDeviceWrapper myCaptureDeviceWrapper = new MyCaptureDeviceWrapper(dev);
-                if (myCaptureDeviceWrapper.IpAddress == null)
-                {
+                if (myCaptureDeviceWrapper.IpAddress == null) {
                     continue;
                 }
 

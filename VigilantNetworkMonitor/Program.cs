@@ -8,8 +8,7 @@ using VigilantNetworkMonitor.Packet.Filter.VariableComparison.Factory;
 using VigilantNetworkMonitor.Packet.Variable.Factory;
 using VigilantNetworkMonitor.Service;
 
-namespace VigilantNetworkMonitor
-{
+namespace VigilantNetworkMonitor {
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.
