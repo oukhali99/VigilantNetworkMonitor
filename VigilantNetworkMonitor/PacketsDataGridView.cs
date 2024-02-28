@@ -1,7 +1,9 @@
-﻿using VigilantNetworkMonitor.Model;
-using VigilantNetworkMonitor.PacketFilter.Service;
+﻿using VigilantNetworkMonitor.Packet;
+using VigilantNetworkMonitor.Packet.Filter.Service;
+using VigilantNetworkMonitor.Service;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor
+{
     public class PacketsDataGridView : DataGridView {
 
         private IPacketFilterService? _packetFilterService;

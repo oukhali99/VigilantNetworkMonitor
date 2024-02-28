@@ -1,6 +1,7 @@
-﻿using VigilantNetworkMonitor.PacketFilter.Service;
+﻿using VigilantNetworkMonitor.Packet.Filter.Service;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor
+{
     public partial class SavedFiltersControl : UserControl {
         private IPacketFilterService? _packetFilterService;
 

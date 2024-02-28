@@ -1,13 +1,15 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using VigilantNetworkMonitor.Comparison.Service;
-using VigilantNetworkMonitor.PacketFilter.Factory;
-using VigilantNetworkMonitor.PacketFilter.Service;
-using VigilantNetworkMonitor.PacketFilter.VariableComparison.Factory;
-using VigilantNetworkMonitor.PacketVariable.Factory;
+using VigilantNetworkMonitor.Model.Comparison.Factory;
+using VigilantNetworkMonitor.Packet.Filter.Factory;
+using VigilantNetworkMonitor.Packet.Filter.Service;
+using VigilantNetworkMonitor.Packet.Filter.VariableComparison.Factory;
+using VigilantNetworkMonitor.Packet.Variable.Factory;
+using VigilantNetworkMonitor.Service;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor
+{
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.

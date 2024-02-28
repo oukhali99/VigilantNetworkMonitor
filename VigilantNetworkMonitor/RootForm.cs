@@ -1,12 +1,14 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using VigilantNetworkMonitor.Model;
-using VigilantNetworkMonitor.PacketFilter.Base;
-using VigilantNetworkMonitor.PacketFilter.Factory;
-using VigilantNetworkMonitor.PacketFilter.Service;
-using static VigilantNetworkMonitor.PacketFilter.Service.IPacketFilterService;
+using VigilantNetworkMonitor.Packet.Filter.Base;
+using VigilantNetworkMonitor.Packet.Filter.Factory;
+using VigilantNetworkMonitor.Packet.Filter.Service;
+using VigilantNetworkMonitor.Service;
+using static VigilantNetworkMonitor.Packet.Filter.Service.IPacketFilterService;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor
+{
     public partial class RootForm : Form {
 
         private readonly INetworkOptions _networkOptions;

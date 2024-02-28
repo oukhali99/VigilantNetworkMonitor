@@ -1,6 +1,8 @@
-﻿using VigilantNetworkMonitor.PacketFilter.Service;
+﻿using VigilantNetworkMonitor.Packet.Filter.Service;
+using VigilantNetworkMonitor.Service;
 
-namespace VigilantNetworkMonitor {
+namespace VigilantNetworkMonitor
+{
     public partial class OptionsForm : Form {
 
         private readonly INetworkOptions _networkOptions;
